@@ -1,0 +1,321 @@
+openapi: 3.0.3
+info:
+  title: SheevaConnect Authentication Webhooks API
+  version: '2.0'
+  description: 'This SheevaConnect™ API Specification 2.0 is © 2024 Parkofon Inc. (d/b/a Sheeva.AI) and is proprietary information that may not be duplicated, redistributed, form the basis of derivative works, or publicly performed/displayed without the expressed written permission of Sheeva.AI. If you wish to use the SheevaConnect™ API Specification 2.0 and use the SheevaConnect™ cloud platform, please contact Sheeva.AI for a license.
+
+    SheevaConnect APIs enable connected vehicle payments & last-mile services for various use cases including Fueling, EV Charging, Parking and Retail. This solution allows automated & contactless payment in addition to proactive identification of user needs and last-mile navigation to the nearest Sheeva Pay enabled outlets.
+
+    All APIs follow HTTP status codes, return HTTP 200 OK when successful and following HTTP errors with a message. The message is self explaining to indicate the error in request. The example error codes include :
+
+
+
+
+    Error Code
+
+    Message
+
+
+
+
+
+    400
+
+    Bad Request : Check the parameter values
+
+
+
+    404
+
+    Resource not found
+
+
+
+    500
+
+    Internal Server Error
+
+
+
+
+    SheevaConnect creates a session when system detects that vehicle requires a service (FUEL, CHARGING, PARKING). Each session goes through various statuses.
+
+    Session Status Codes
+
+
+
+
+    Status
+
+    Description
+
+
+
+
+
+    LOW_FUEL_DETECTED
+
+    If vehicle was low on fuel and system has sent the notification to driver for low fuel or if vehicle is not low on fuel but driver clicks on fuel icon to pay.
+
+
+
+    LOW_CHARGE_DETECTED
+
+    If vehicle was low on charge and system has sent the notification to driver for low charged or if vehicle is not low on chrage but driver clicks on charge icon to pay.
+
+
+
+    AT_SERVICE_HUB
+
+    The driver has reached the fuel station / EV charge station / etc.
+
+
+
+    AT_SERVICE_POINT
+
+    The driver is at fuel pump / charging bay.
+
+
+
+    SERVICE_POINT_CONFIRMED
+
+    Driver confirms the fuel pump / charging bay.
+
+
+
+    SERVICE_IN_PROGRESS
+
+    When driver uses a parking service and vehicle is parked
+
+
+
+    SERVICE_COMPLETE
+
+    When user marks the fuel, charging, parking complete
+
+
+
+    SERVICE_CANCELLED_BY_DRIVER
+
+    When user cancel the service at the pump/ charging bay
+
+
+
+    SERVICE_ABORTED_BY_SYSTEM
+
+    When user does opt for service and move away from fuel pump/ charging bay
+
+
+
+
+    Payment Status Codes
+
+
+
+
+    Status
+
+    Description
+
+
+
+
+
+    PAYMENT_AUTHORIZED
+
+    When a payment is authorized. Only applicable for Credit Card, Wallet and Rewards.
+
+
+
+    PAYMENT_INITIATED
+
+    When a payment is in progress. Only applicable for UPI in India.
+
+
+
+    PAYMENT_COMPLETE
+
+    Payment has been processed for a g'
+  contact:
+    name: Sheeva.AI
+    url: https://sheeva.ai/contact-us
+  x-company: Parkofon Inc. (d/b/a Sheeva.AI)
+servers:
+- url: https://us-apis.sheeva.ai
+  description: Production (USA)
+- url: https://in-apis.sheeva.ai
+  description: Production (India)
+- url: https://dev-us-apis.sheeva.ai
+  description: Sandbox (USA)
+- url: https://dev-in-apis.sheeva.ai
+  description: Sandbox (India)
+security:
+- bearerAuth: []
+tags:
+- name: Webhooks
+paths:
+  /v2/partner-apis/webhooks/status-updates:
+    post:
+      summary: Register Status Webhook
+      operationId: registerStatusWebhook
+      tags:
+      - Webhooks
+      responses:
+        '201':
+          description: Created
+      description: 'This request allows registering an HTTP POST status webhook with SeevaConnect.
+
+        If successful, returns: HTTP 201 CREATED.
+
+        Examples below demonstrate the json body Sheeva will call your registered webhook endpoint with:
+
+
+        Service Alert Example
+
+        Status Callback Example
+
+
+        Status:
+
+
+
+
+        Status
+
+        serviceType
+
+
+
+
+
+        LOW_FUEL_DETECTED
+
+        FUEL
+
+
+
+        LOW_CHARGE_DETECTED
+
+        CHARGING
+
+
+
+        AT_SERVICE_HUB
+
+        FUEL, CHARGING, PARKING
+
+
+
+        AT_SERVICE_POINT
+
+        FUEL, CHARGING, PARKING
+
+
+
+        SERVICE_POINT_CONFIRMED
+
+        FUEL, CHARGING, PARKING
+
+
+
+        SERVICE_IN_PROGRESS
+
+        PARKING
+
+
+
+        SERVICE_COMPLETE
+
+        FUEL, CHARGING, PARKING
+
+
+
+        SERVICE_CANCELLED_BY_DRIVER
+
+        FUEL, CHARGING, PARKING
+
+
+
+        SERVICE_ABORTED_BY_SYSTEM
+
+        FUEL, CHARGING, PARKING
+
+
+
+        PAYMENT_COMPLETE
+
+        FUEL, CHARGING, PARKING
+
+
+
+        PAYMENT_FAILED
+
+        FUEL, CHARGING, PARKING
+
+
+
+
+        '
+      parameters:
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+      requestBody:
+        content:
+          application/json:
+            example:
+              webhookUrl: https://test.denso.com
+              hmacSigningKey: f7bc83f430538424b13298e6aa6fb143ef4d59a14946175997479dbc2d1a3cd8
+              apikey: af75e1f0-f472-48bb-83b2-35541dc860dd
+  /v2/partner-apis/webhooks:
+    get:
+      summary: Get Registered Web Hooks
+      operationId: getRegisteredWebHooks
+      tags:
+      - Webhooks
+      responses:
+        '200':
+          description: OK
+      parameters:
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+  /v2/partner-apis/webhooks/{webhook-id}:
+    delete:
+      summary: Delete a Web Hook
+      operationId: deleteAWebHook
+      tags:
+      - Webhooks
+      responses:
+        '200':
+          description: OK
+      parameters:
+      - name: webhook-id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Access token obtained from GET /v2/auth (exchange client-id/client-secret), sent in the Authorization header.
+    clientCredentials:
+      type: apiKey
+      in: header
+      name: client-id
+      description: client-id + client-secret headers on GET /v2/auth to obtain an access token.

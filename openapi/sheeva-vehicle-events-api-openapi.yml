@@ -1,0 +1,219 @@
+openapi: 3.0.3
+info:
+  title: SheevaConnect Authentication Vehicle Events API
+  version: '2.0'
+  description: 'This SheevaConnect™ API Specification 2.0 is © 2024 Parkofon Inc. (d/b/a Sheeva.AI) and is proprietary information that may not be duplicated, redistributed, form the basis of derivative works, or publicly performed/displayed without the expressed written permission of Sheeva.AI. If you wish to use the SheevaConnect™ API Specification 2.0 and use the SheevaConnect™ cloud platform, please contact Sheeva.AI for a license.
+
+    SheevaConnect APIs enable connected vehicle payments & last-mile services for various use cases including Fueling, EV Charging, Parking and Retail. This solution allows automated & contactless payment in addition to proactive identification of user needs and last-mile navigation to the nearest Sheeva Pay enabled outlets.
+
+    All APIs follow HTTP status codes, return HTTP 200 OK when successful and following HTTP errors with a message. The message is self explaining to indicate the error in request. The example error codes include :
+
+
+
+
+    Error Code
+
+    Message
+
+
+
+
+
+    400
+
+    Bad Request : Check the parameter values
+
+
+
+    404
+
+    Resource not found
+
+
+
+    500
+
+    Internal Server Error
+
+
+
+
+    SheevaConnect creates a session when system detects that vehicle requires a service (FUEL, CHARGING, PARKING). Each session goes through various statuses.
+
+    Session Status Codes
+
+
+
+
+    Status
+
+    Description
+
+
+
+
+
+    LOW_FUEL_DETECTED
+
+    If vehicle was low on fuel and system has sent the notification to driver for low fuel or if vehicle is not low on fuel but driver clicks on fuel icon to pay.
+
+
+
+    LOW_CHARGE_DETECTED
+
+    If vehicle was low on charge and system has sent the notification to driver for low charged or if vehicle is not low on chrage but driver clicks on charge icon to pay.
+
+
+
+    AT_SERVICE_HUB
+
+    The driver has reached the fuel station / EV charge station / etc.
+
+
+
+    AT_SERVICE_POINT
+
+    The driver is at fuel pump / charging bay.
+
+
+
+    SERVICE_POINT_CONFIRMED
+
+    Driver confirms the fuel pump / charging bay.
+
+
+
+    SERVICE_IN_PROGRESS
+
+    When driver uses a parking service and vehicle is parked
+
+
+
+    SERVICE_COMPLETE
+
+    When user marks the fuel, charging, parking complete
+
+
+
+    SERVICE_CANCELLED_BY_DRIVER
+
+    When user cancel the service at the pump/ charging bay
+
+
+
+    SERVICE_ABORTED_BY_SYSTEM
+
+    When user does opt for service and move away from fuel pump/ charging bay
+
+
+
+
+    Payment Status Codes
+
+
+
+
+    Status
+
+    Description
+
+
+
+
+
+    PAYMENT_AUTHORIZED
+
+    When a payment is authorized. Only applicable for Credit Card, Wallet and Rewards.
+
+
+
+    PAYMENT_INITIATED
+
+    When a payment is in progress. Only applicable for UPI in India.
+
+
+
+    PAYMENT_COMPLETE
+
+    Payment has been processed for a g'
+  contact:
+    name: Sheeva.AI
+    url: https://sheeva.ai/contact-us
+  x-company: Parkofon Inc. (d/b/a Sheeva.AI)
+servers:
+- url: https://us-apis.sheeva.ai
+  description: Production (USA)
+- url: https://in-apis.sheeva.ai
+  description: Production (India)
+- url: https://dev-us-apis.sheeva.ai
+  description: Sandbox (USA)
+- url: https://dev-in-apis.sheeva.ai
+  description: Sandbox (India)
+security:
+- bearerAuth: []
+tags:
+- name: Vehicle Events
+paths:
+  /vehicle-events:
+    post:
+      summary: Vehicle Events
+      operationId: vehicleEvents
+      tags:
+      - Vehicle Events
+      responses:
+        '200':
+          description: Response
+      description: 'This request accepts vehicle status for multiple vehicles, which includes current vehicle location, fuel / charge level, speed, parking brake and ignition status.
+
+        If successful, returns: HTTP 201 CREATED.
+
+        Note: This replaces the older "Vehicle Events" endpoint. Use this instead.
+
+        '
+      parameters:
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+      - name: clientId
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+      requestBody:
+        content:
+          application/json:
+            example:
+            - vin: TSTLRGBL663PR2127
+              statuses:
+              - key: speed
+                value: '30.5'
+                timestamp: 1685619240
+              - key: fuelLevel
+                value: '6'
+                timestamp: 1685619240
+              - key: chargingLevel
+                value: '6'
+                timestamp: 1685619240
+              - key: ignition
+                value: 'on'
+                timestamp: 1685619240
+              location:
+                latitude: 38.9263669701
+                longitude: -77.2406171718
+                timestamp: 1685619240
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Access token obtained from GET /v2/auth (exchange client-id/client-secret), sent in the Authorization header.
+    clientCredentials:
+      type: apiKey
+      in: header
+      name: client-id
+      description: client-id + client-secret headers on GET /v2/auth to obtain an access token.

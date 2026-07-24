@@ -1,0 +1,230 @@
+openapi: 3.0.3
+info:
+  title: SheevaConnect Authentication Parking API
+  version: '2.0'
+  description: 'This SheevaConnect™ API Specification 2.0 is © 2024 Parkofon Inc. (d/b/a Sheeva.AI) and is proprietary information that may not be duplicated, redistributed, form the basis of derivative works, or publicly performed/displayed without the expressed written permission of Sheeva.AI. If you wish to use the SheevaConnect™ API Specification 2.0 and use the SheevaConnect™ cloud platform, please contact Sheeva.AI for a license.
+
+    SheevaConnect APIs enable connected vehicle payments & last-mile services for various use cases including Fueling, EV Charging, Parking and Retail. This solution allows automated & contactless payment in addition to proactive identification of user needs and last-mile navigation to the nearest Sheeva Pay enabled outlets.
+
+    All APIs follow HTTP status codes, return HTTP 200 OK when successful and following HTTP errors with a message. The message is self explaining to indicate the error in request. The example error codes include :
+
+
+
+
+    Error Code
+
+    Message
+
+
+
+
+
+    400
+
+    Bad Request : Check the parameter values
+
+
+
+    404
+
+    Resource not found
+
+
+
+    500
+
+    Internal Server Error
+
+
+
+
+    SheevaConnect creates a session when system detects that vehicle requires a service (FUEL, CHARGING, PARKING). Each session goes through various statuses.
+
+    Session Status Codes
+
+
+
+
+    Status
+
+    Description
+
+
+
+
+
+    LOW_FUEL_DETECTED
+
+    If vehicle was low on fuel and system has sent the notification to driver for low fuel or if vehicle is not low on fuel but driver clicks on fuel icon to pay.
+
+
+
+    LOW_CHARGE_DETECTED
+
+    If vehicle was low on charge and system has sent the notification to driver for low charged or if vehicle is not low on chrage but driver clicks on charge icon to pay.
+
+
+
+    AT_SERVICE_HUB
+
+    The driver has reached the fuel station / EV charge station / etc.
+
+
+
+    AT_SERVICE_POINT
+
+    The driver is at fuel pump / charging bay.
+
+
+
+    SERVICE_POINT_CONFIRMED
+
+    Driver confirms the fuel pump / charging bay.
+
+
+
+    SERVICE_IN_PROGRESS
+
+    When driver uses a parking service and vehicle is parked
+
+
+
+    SERVICE_COMPLETE
+
+    When user marks the fuel, charging, parking complete
+
+
+
+    SERVICE_CANCELLED_BY_DRIVER
+
+    When user cancel the service at the pump/ charging bay
+
+
+
+    SERVICE_ABORTED_BY_SYSTEM
+
+    When user does opt for service and move away from fuel pump/ charging bay
+
+
+
+
+    Payment Status Codes
+
+
+
+
+    Status
+
+    Description
+
+
+
+
+
+    PAYMENT_AUTHORIZED
+
+    When a payment is authorized. Only applicable for Credit Card, Wallet and Rewards.
+
+
+
+    PAYMENT_INITIATED
+
+    When a payment is in progress. Only applicable for UPI in India.
+
+
+
+    PAYMENT_COMPLETE
+
+    Payment has been processed for a g'
+  contact:
+    name: Sheeva.AI
+    url: https://sheeva.ai/contact-us
+  x-company: Parkofon Inc. (d/b/a Sheeva.AI)
+servers:
+- url: https://us-apis.sheeva.ai
+  description: Production (USA)
+- url: https://in-apis.sheeva.ai
+  description: Production (India)
+- url: https://dev-us-apis.sheeva.ai
+  description: Sandbox (USA)
+- url: https://dev-in-apis.sheeva.ai
+  description: Sandbox (India)
+security:
+- bearerAuth: []
+tags:
+- name: Parking
+paths:
+  /v2/partner-apis/parking/quote:
+    get:
+      summary: Get Quote
+      operationId: getQuote
+      tags:
+      - Parking
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              example:
+                serviceHubId: '1100053'
+                sessionId: parking_UbnAGCt2fQItXcZHsrE8
+                quoteId: d7156f56-3c6c-458a-8203-ee1d6c026f68
+                startTime: '2024-06-19 13:12:00'
+                endTime: '2024-06-19 14:12:00'
+                price: 2
+                currency: USD
+                createdAt: 1719950406962
+                expiresIn: 15
+      description: 'Sending demoMode=1 would run a transaction with fake payment and will not activate the pump, charger or the parking lot. This helps with simulated testing in the sandbox / development.
+
+        '
+      parameters:
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+  /v2/partner-apis/parking/reserve:
+    post:
+      summary: Reserve Parking
+      operationId: reserveParking
+      tags:
+      - Parking
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              example:
+                orderId: 3de93d80-5b67-4cbf-a1f9-2482171b4f08
+                confirmationCode: '10001'
+      description: 'Sending demoMode=1 would run a transaction with fake payment and will not activate the pump, charger or the parking lot. This helps with simulated testing in the sandbox / development.
+
+        '
+      parameters:
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+      requestBody:
+        content:
+          application/json:
+            example:
+              vin: '{{vin}}'
+              sessionId: '{{parkingSessionId}}'
+              quoteId: '{{quoteId}}'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Access token obtained from GET /v2/auth (exchange client-id/client-secret), sent in the Authorization header.
+    clientCredentials:
+      type: apiKey
+      in: header
+      name: client-id
+      description: client-id + client-secret headers on GET /v2/auth to obtain an access token.

@@ -1,0 +1,419 @@
+openapi: 3.0.3
+info:
+  title: SheevaConnect Authentication Service Hubs (Points Of Interest) API
+  version: '2.0'
+  description: 'This SheevaConnect™ API Specification 2.0 is © 2024 Parkofon Inc. (d/b/a Sheeva.AI) and is proprietary information that may not be duplicated, redistributed, form the basis of derivative works, or publicly performed/displayed without the expressed written permission of Sheeva.AI. If you wish to use the SheevaConnect™ API Specification 2.0 and use the SheevaConnect™ cloud platform, please contact Sheeva.AI for a license.
+
+    SheevaConnect APIs enable connected vehicle payments & last-mile services for various use cases including Fueling, EV Charging, Parking and Retail. This solution allows automated & contactless payment in addition to proactive identification of user needs and last-mile navigation to the nearest Sheeva Pay enabled outlets.
+
+    All APIs follow HTTP status codes, return HTTP 200 OK when successful and following HTTP errors with a message. The message is self explaining to indicate the error in request. The example error codes include :
+
+
+
+
+    Error Code
+
+    Message
+
+
+
+
+
+    400
+
+    Bad Request : Check the parameter values
+
+
+
+    404
+
+    Resource not found
+
+
+
+    500
+
+    Internal Server Error
+
+
+
+
+    SheevaConnect creates a session when system detects that vehicle requires a service (FUEL, CHARGING, PARKING). Each session goes through various statuses.
+
+    Session Status Codes
+
+
+
+
+    Status
+
+    Description
+
+
+
+
+
+    LOW_FUEL_DETECTED
+
+    If vehicle was low on fuel and system has sent the notification to driver for low fuel or if vehicle is not low on fuel but driver clicks on fuel icon to pay.
+
+
+
+    LOW_CHARGE_DETECTED
+
+    If vehicle was low on charge and system has sent the notification to driver for low charged or if vehicle is not low on chrage but driver clicks on charge icon to pay.
+
+
+
+    AT_SERVICE_HUB
+
+    The driver has reached the fuel station / EV charge station / etc.
+
+
+
+    AT_SERVICE_POINT
+
+    The driver is at fuel pump / charging bay.
+
+
+
+    SERVICE_POINT_CONFIRMED
+
+    Driver confirms the fuel pump / charging bay.
+
+
+
+    SERVICE_IN_PROGRESS
+
+    When driver uses a parking service and vehicle is parked
+
+
+
+    SERVICE_COMPLETE
+
+    When user marks the fuel, charging, parking complete
+
+
+
+    SERVICE_CANCELLED_BY_DRIVER
+
+    When user cancel the service at the pump/ charging bay
+
+
+
+    SERVICE_ABORTED_BY_SYSTEM
+
+    When user does opt for service and move away from fuel pump/ charging bay
+
+
+
+
+    Payment Status Codes
+
+
+
+
+    Status
+
+    Description
+
+
+
+
+
+    PAYMENT_AUTHORIZED
+
+    When a payment is authorized. Only applicable for Credit Card, Wallet and Rewards.
+
+
+
+    PAYMENT_INITIATED
+
+    When a payment is in progress. Only applicable for UPI in India.
+
+
+
+    PAYMENT_COMPLETE
+
+    Payment has been processed for a g'
+  contact:
+    name: Sheeva.AI
+    url: https://sheeva.ai/contact-us
+  x-company: Parkofon Inc. (d/b/a Sheeva.AI)
+servers:
+- url: https://us-apis.sheeva.ai
+  description: Production (USA)
+- url: https://in-apis.sheeva.ai
+  description: Production (India)
+- url: https://dev-us-apis.sheeva.ai
+  description: Sandbox (USA)
+- url: https://dev-in-apis.sheeva.ai
+  description: Sandbox (India)
+security:
+- bearerAuth: []
+tags:
+- name: Service Hubs (Points Of Interest)
+paths:
+  /v2/partner-apis/serviceHubs:
+    get:
+      summary: Get Service Hubs
+      operationId: getServiceHubs
+      tags:
+      - Service Hubs (Points Of Interest)
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              example:
+              - id: fst_380a228fd332746cadc3
+                type: FUEL
+                displayName: TEANECK TWSP
+                currency: USD
+                location: 40.885482,-74.007431
+                logoUrl: https://dev-in-sheeva-tandc.s3.ap-south-1.amazonaws.com/iocl_logo.png
+                addressDetails:
+                  streetAddress: Blythe Road, Chamberlayne
+                  city: Richmond
+                  state: Virginia
+                  zipCode: '23116'
+                  country: US
+                fuelPrices:
+                - fuelType: Gas Regular
+                  price: 3.5
+                  unit: gallon
+                - fuelType: Gas Premium
+                  price: 4.5
+                  unit: gallon
+                - fuelType: Diesel
+                  price: 3.5
+                  unit: gallon
+                promotions:
+                - name: Reward Days
+                  category: FUEL
+                  discount: Get 10 cents off per gallon
+                  mediaURL: https://example.com/abc.jpg
+                amenities:
+                - Washrooms
+                - Free Air
+                - Convenience Store
+                operatingHours:
+                - 06:00-23:30
+                openingHours:
+                - day: '1'
+                  hours:
+                  - 5:00 - 22:00
+                - day: '2'
+                  hours:
+                  - 5:00 - 22:00
+                - day: '3'
+                  hours:
+                  - 5:00 - 22:00
+                - day: '4'
+                  hours:
+                  - 5:00 - 22:00
+                - day: '5'
+                  hours:
+                  - 5:00 - 22:00
+                - day: '6'
+                  hours:
+                  - 6:00 - 22:00
+                - day: '7'
+                  hours:
+                  - 8:00 - 22:00
+                paymentEnabled: true
+                distance: 8.710607771265286
+                address: Blythe Road, Chamberlayne
+                city: Richmond
+                stateCode: VA
+      description: 'This request returns POIs based on geolocation and service type.
+
+        If successful, returns: HTTP 201 CREATED.
+
+        '
+      parameters:
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+    post:
+      summary: Get Service Hubs (Deprecated)
+      operationId: getServiceHubs2
+      tags:
+      - Service Hubs (Points Of Interest)
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              example:
+              - poiId: cst_3f798db4b2fef377ab1b
+                type: CHARGING
+                displayName: PARKRDIGE IV
+                currency: USD
+                location: 38.943907,-77.312812
+                address: 10700 Parkridge Blvd, Reston, va, us
+                active: true
+                chargers:
+                - latitude: 38.943905
+                  longitude: -77.312798
+                  unified_connector_id: db5d95aa-f69a-443a-b8cd-3aac6627360f
+                  station_id: 84cc78fd-2c53-48a3-9c21-3aeeb08e0f97
+                  connector_name: PARKRDIGE IV, STATION 1
+                  base_rate: 0.19
+                  connector_type: J-1772
+                  network: Charge_Point
+                  speed: 6.6
+                  availability: available
+                  street_address: 10700 Parkridge Blvd
+                  city: Reston
+                  state: Virginia
+                - latitude: 38.943905
+                  longitude: -77.312798
+                  unified_connector_id: 90f29fbe-18fd-4c95-bb14-05a990af579f
+                  station_id: 84cc78fd-2c53-48a3-9c21-3aeeb08e0f97
+                  connector_name: PARKRDIGE IV, STATION 1
+                  base_rate: 0.19
+                  connector_type: J-1772
+                  network: Charge_Point
+                  speed: 6.6
+                  availability: available
+                  street_address: 10700 Parkridge Blvd
+                  city: Reston
+                  state: Virginia
+              - poiId: cst_6f216de55c646e5231d9
+                type: CHARGING
+                displayName: WOLF TRAP
+                currency: USD
+                location: 38.933441,-77.265007
+                address: 1645 Trap Rd, Vienna, va, us
+                active: true
+                chargers:
+                - latitude: 38.933426
+                  longitude: -77.264969
+                  unified_connector_id: 8ad1da7f-fa0e-4152-aec2-f3c48c0c7f0b
+                  station_id: 81d0f7e9-f1a0-45e5-b959-1d3dfd3366e9
+                  connector_name: WOLF TRAP, BARNS@WOLF TRAP
+                  base_rate: 0.0
+                  connector_type: J-1772
+                  network: Charge_Point
+                  speed: 6.6
+                  availability: available
+                  street_address: 1645 Trap Rd
+                  city: Vienna
+                  state: Virginia
+                - latitude: 38.933426
+                  longitude: -77.264969
+                  unified_connector_id: fcaea0c9-3841-40bb-94f4-1ae96e724e93
+                  station_id: 81d0f7e9-f1a0-45e5-b959-1d3dfd3366e9
+                  connector_name: WOLF TRAP, BARNS@WOLF TRAP
+                  base_rate: 0.0
+                  connector_type: J-1772
+                  network: Charge_Point
+                  speed: 6.6
+                  availability: in_use
+                  street_address: 1645 Trap Rd
+                  city: Vienna
+                  state: Virginia
+      description: 'This request returns POIs based on geolocation and service type.
+
+        If successful, returns: HTTP 201 CREATED.
+
+        '
+      parameters:
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+      requestBody:
+        content:
+          application/json:
+            example:
+              latitude: 38.9262643
+              longitude: -77.2428208
+              searchValue: 5
+              distance: MILES
+              type: FUEL
+  /v2/partner-apis/serviceHubs/{serviceHubId}:
+    get:
+      summary: Get Service Hub Details
+      operationId: getServiceHubDetails
+      tags:
+      - Service Hubs (Points Of Interest)
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              example:
+                displayName: Marina Lot 9
+                currency: USD
+                location: 33.982403360821465,-118.4560913004027
+                addressDetails:
+                  city: N/A
+                  state: N/A
+                  zipCode: N/A
+                  country: N/A
+                  streetAddress: N/A
+                amenities:
+                - Convenience Store
+                - Free Air
+                - Washrooms
+                promotions:
+                - name: Reward Days
+                  category: PARKING
+                  discount: N/A
+                  mediaURL: https://example.com/abc.jpg
+                polygon: 33.982144 -118.455279;33.982945 -118.456666;33.982662 -118.456904;33.981964 -118.455694;33.982008 -118.455657;33.981974 -118.455600;33.981971 -118.455538;33.981993 -118.455475;33.982082 -118.455331;33.982144 -118.455279
+                timezone: America/Los_Angeles
+                openingHours:
+                - day: '1'
+                  hours:
+                  - 5:00 - 22:00
+                - day: '2'
+                  hours:
+                  - 5:00 - 22:00
+                - day: '3'
+                  hours:
+                  - 5:00 - 22:00
+                - day: '4'
+                  hours:
+                  - 5:00 - 22:00
+                - day: '5'
+                  hours:
+                  - 5:00 - 22:00
+                - day: '6'
+                  hours:
+                  - 6:00 - 22:00
+                - day: '7'
+                  hours:
+                  - 8:00 - 22:00
+                id: '1100053'
+      parameters:
+      - name: serviceHubId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Access token obtained from GET /v2/auth (exchange client-id/client-secret), sent in the Authorization header.
+    clientCredentials:
+      type: apiKey
+      in: header
+      name: client-id
+      description: client-id + client-secret headers on GET /v2/auth to obtain an access token.
