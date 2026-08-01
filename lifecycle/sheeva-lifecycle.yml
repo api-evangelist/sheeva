@@ -1,0 +1,20 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/sheeva-openapi.yml
+versioning:
+  scheme: uri-path
+  current: v2
+  note: SheevaConnect API Specification 2.0; all partner endpoints are under /v2/partner-apis.
+deprecation:
+  policy_url: null
+  note: >-
+    No formal deprecation/Sunset (RFC 8594) policy is published. Two operations are marked
+    "(Deprecated)" in the published specification and superseded by newer forms.
+sla:
+  url: null
+status_page: null
+deprecated_operations:
+  - operation: openapi/sheeva-openapi.yml#getListOfLinkedVehiclesToADriver
+    superseded_by: getDriverDetails / getDriversByVin
+  - operation: openapi/sheeva-openapi.yml#getServiceHubs2
+    note: POST form of Get Service Hubs, superseded by GET /v2/partner-apis/serviceHubs

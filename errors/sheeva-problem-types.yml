@@ -1,0 +1,56 @@
+generated: '2026-07-21'
+method: searched
+source: https://api-spec.sheeva.ai/ (SheevaConnect API Specification 2.0 collection description + response examples)
+format: http-status
+note: >-
+  SheevaConnect returns standard HTTP status codes with a self-describing JSON message
+  (not RFC 9457 problem+json). Errors are documented narratively in the collection description
+  and surfaced as example responses. Session and payment lifecycle states are enumerated
+  separately below because callers branch on them the way they would on error codes.
+error_envelope:
+  content_type: application/json
+  fields:
+    - message  # human-readable explanation of the failure
+problems:
+  - status: 400
+    title: 'Bad Request'
+    detail: 'Check the parameter values.'
+  - status: 404
+    title: 'Resource not found'
+  - status: 409
+    title: 'Conflict'
+    detail: 'Observed on create operations (e.g. duplicate driver/vehicle registration).'
+  - status: 500
+    title: 'Internal Server Error'
+session_status_codes:
+  - code: LOW_FUEL_DETECTED
+    meaning: Vehicle low on fuel and driver notified, or driver tapped the fuel icon to pay.
+  - code: LOW_CHARGE_DETECTED
+    meaning: Vehicle low on charge and driver notified, or driver tapped the charge icon to pay.
+  - code: AT_SERVICE_HUB
+    meaning: Driver has reached the fuel station / EV charge station.
+  - code: AT_SERVICE_POINT
+    meaning: Driver is at the fuel pump / charging bay.
+  - code: SERVICE_POINT_CONFIRMED
+    meaning: Driver confirmed the fuel pump / charging bay.
+  - code: SERVICE_IN_PROGRESS
+    meaning: Parking service in use and vehicle is parked.
+  - code: SERVICE_COMPLETE
+    meaning: User marked the fuel/charging/parking service complete.
+  - code: SERVICE_CANCELLED_BY_DRIVER
+    meaning: User cancelled the service at the pump/charging bay.
+  - code: SERVICE_ABORTED_BY_SYSTEM
+    meaning: User opted for a service then moved away from the pump/charging bay.
+payment_status_codes:
+  - code: PAYMENT_AUTHORIZED
+    meaning: Payment authorized (Credit Card, Wallet, Rewards).
+  - code: PAYMENT_INITIATED
+    meaning: Payment in progress (UPI in India).
+  - code: PAYMENT_COMPLETE
+    meaning: Payment processed for the service (all methods).
+  - code: PAYMENT_FAILED
+    meaning: Payment failed for the service (all methods).
+  - code: PAYMENT_VOIDED
+    meaning: Payment authorization voided (all methods).
+  - code: PAYMENT_REFUNDED
+    meaning: Completed payment refunded (all methods).

@@ -1,0 +1,169 @@
+generated: '2026-07-21'
+method: derived
+status: candidate
+source: openapi/sheeva-openapi.yml
+note: No official hosted MCP server found for Sheeva.AI (searched docs, npm @modelcontextprotocol, registries).
+  Candidate tool list derived one-per-operation from the SheevaConnect OpenAPI.
+server:
+  name: sheeva
+  transport: stdio
+tools:
+- name: authentication
+  description: Authentication
+  source_operation: openapi/sheeva-openapi.yml#authentication
+- name: vehicleEvents
+  description: Vehicle Events
+  source_operation: openapi/sheeva-openapi.yml#vehicleEvents
+- name: registerDriver
+  description: Register Driver
+  source_operation: openapi/sheeva-openapi.yml#registerDriver
+- name: getListOfLinkedVehiclesToADriver
+  description: Get List of Linked Vehicles to a Driver (Deprecated)
+  source_operation: openapi/sheeva-openapi.yml#getListOfLinkedVehiclesToADriver
+- name: updateDriver
+  description: Update Driver
+  source_operation: openapi/sheeva-openapi.yml#updateDriver
+- name: getDriverDetails
+  description: Get Driver Details
+  source_operation: openapi/sheeva-openapi.yml#getDriverDetails
+- name: linkDriverToAVehicle
+  description: Link Driver to a Vehicle
+  source_operation: openapi/sheeva-openapi.yml#linkDriverToAVehicle
+- name: unlinkDriverFromAVehicle
+  description: Unlink Driver from a Vehicle
+  source_operation: openapi/sheeva-openapi.yml#unlinkDriverFromAVehicle
+- name: markDriverAsCurrentDriverForAVehicle
+  description: Mark Driver as current Driver for a Vehicle
+  source_operation: openapi/sheeva-openapi.yml#markDriverAsCurrentDriverForAVehicle
+- name: removeDriverAsCurrentDriverForAVehicle
+  description: Remove Driver as Current driver for a vehicle
+  source_operation: openapi/sheeva-openapi.yml#removeDriverAsCurrentDriverForAVehicle
+- name: searchVehicles
+  description: Search Vehicles
+  source_operation: openapi/sheeva-openapi.yml#searchVehicles
+- name: registerVehicle
+  description: Register Vehicle
+  source_operation: openapi/sheeva-openapi.yml#registerVehicle
+- name: getAVehicle
+  description: Get a Vehicle
+  source_operation: openapi/sheeva-openapi.yml#getAVehicle
+- name: updateVehicle
+  description: Update Vehicle
+  source_operation: openapi/sheeva-openapi.yml#updateVehicle
+- name: getDriversByVin
+  description: Get Drivers by VIN
+  source_operation: openapi/sheeva-openapi.yml#getDriversByVin
+- name: updateAlertPreference
+  description: Update Alert Preference
+  source_operation: openapi/sheeva-openapi.yml#updateAlertPreference
+- name: getAlertPreference
+  description: Get Alert Preference
+  source_operation: openapi/sheeva-openapi.yml#getAlertPreference
+- name: getCurrentlyActiveSessions
+  description: Get Currently Active Sessions
+  source_operation: openapi/sheeva-openapi.yml#getCurrentlyActiveSessions
+- name: getDetailsOfASession
+  description: Get Details of a Session
+  source_operation: openapi/sheeva-openapi.yml#getDetailsOfASession
+- name: collectRatingForCompletedSession
+  description: Collect Rating for Completed Session
+  source_operation: openapi/sheeva-openapi.yml#collectRatingForCompletedSession
+- name: confirmServicePoint
+  description: Confirm Service Point
+  source_operation: openapi/sheeva-openapi.yml#confirmServicePoint
+- name: markServiceComplete
+  description: Mark Service Complete
+  source_operation: openapi/sheeva-openapi.yml#markServiceComplete
+- name: cancelTheFuelSessionByVin
+  description: Cancel the FUEL session by Vin( DEV environment only )
+  source_operation: openapi/sheeva-openapi.yml#cancelTheFuelSessionByVin
+- name: cancelTheFuelSessionBySessionid
+  description: Cancel the FUEL session by sessionId ( DEV environment only )
+  source_operation: openapi/sheeva-openapi.yml#cancelTheFuelSessionBySessionid
+- name: getServiceHubs
+  description: Get Service Hubs
+  source_operation: openapi/sheeva-openapi.yml#getServiceHubs
+- name: getServiceHubs2
+  description: Get Service Hubs (Deprecated)
+  source_operation: openapi/sheeva-openapi.yml#getServiceHubs2
+- name: getServiceHubDetails
+  description: Get Service Hub Details
+  source_operation: openapi/sheeva-openapi.yml#getServiceHubDetails
+- name: getQuote
+  description: Get Quote
+  source_operation: openapi/sheeva-openapi.yml#getQuote
+- name: reserveParking
+  description: Reserve Parking
+  source_operation: openapi/sheeva-openapi.yml#reserveParking
+- name: upiPaymentComplete
+  description: UPI Payment Complete
+  source_operation: openapi/sheeva-openapi.yml#upiPaymentComplete
+- name: payForOrder
+  description: Pay For Order
+  source_operation: openapi/sheeva-openapi.yml#payForOrder
+- name: getPaymentTransactions
+  description: Get Payment Transactions
+  source_operation: openapi/sheeva-openapi.yml#getPaymentTransactions
+- name: getPaymentTransactionsDetails
+  description: Get Payment Transactions Details
+  source_operation: openapi/sheeva-openapi.yml#getPaymentTransactionsDetails
+- name: getPaymentReceipt
+  description: Get Payment Receipt
+  source_operation: openapi/sheeva-openapi.yml#getPaymentReceipt
+- name: getVehicleWallet
+  description: 1 - Get Vehicle Wallet
+  source_operation: openapi/sheeva-openapi.yml#getVehicleWallet
+- name: generatePublicKeyToAddCreditCard
+  description: 2 - Generate Public Key To Add Credit Card
+  source_operation: openapi/sheeva-openapi.yml#generatePublicKeyToAddCreditCard
+- name: addCreditCardToAWallet
+  description: 3 - Add Credit Card To A Wallet
+  source_operation: openapi/sheeva-openapi.yml#addCreditCardToAWallet
+- name: getCreditCardsAssociatedToWallet
+  description: 4 - Get Credit Cards Associated To Wallet
+  source_operation: openapi/sheeva-openapi.yml#getCreditCardsAssociatedToWallet
+- name: getCreditCardById
+  description: 5 - Get Credit Card By Id
+  source_operation: openapi/sheeva-openapi.yml#getCreditCardById
+- name: markCreditCardAsDefault
+  description: 6 - Mark Credit Card As Default
+  source_operation: openapi/sheeva-openapi.yml#markCreditCardAsDefault
+- name: deleteCreditCard
+  description: 7 - Delete Credit Card
+  source_operation: openapi/sheeva-openapi.yml#deleteCreditCard
+- name: getSupportedPaymentMethods
+  description: Get Supported Payment Methods
+  source_operation: openapi/sheeva-openapi.yml#getSupportedPaymentMethods
+- name: authorizePayment
+  description: Authorize Payment
+  source_operation: openapi/sheeva-openapi.yml#authorizePayment
+- name: paymentStatus
+  description: Payment Status
+  source_operation: openapi/sheeva-openapi.yml#paymentStatus
+- name: registerStatusWebhook
+  description: Register Status Webhook
+  source_operation: openapi/sheeva-openapi.yml#registerStatusWebhook
+- name: getRegisteredWebHooks
+  description: Get Registered Web Hooks
+  source_operation: openapi/sheeva-openapi.yml#getRegisteredWebHooks
+- name: deleteAWebHook
+  description: Delete a Web Hook
+  source_operation: openapi/sheeva-openapi.yml#deleteAWebHook
+- name: getMyPrograms
+  description: Get My Programs
+  source_operation: openapi/sheeva-openapi.yml#getMyPrograms
+- name: signUpForAProgram
+  description: Sign up for a program
+  source_operation: openapi/sheeva-openapi.yml#signUpForAProgram
+- name: calculateRewards
+  description: Calculate Rewards (Amount)
+  source_operation: openapi/sheeva-openapi.yml#calculateRewards
+- name: getCancellationReasons
+  description: Get Cancellation Reasons
+  source_operation: openapi/sheeva-openapi.yml#getCancellationReasons
+- name: submitFeedback
+  description: Submit Feedback
+  source_operation: openapi/sheeva-openapi.yml#submitFeedback
+- name: getFeedback
+  description: Get Feedback
+  source_operation: openapi/sheeva-openapi.yml#getFeedback

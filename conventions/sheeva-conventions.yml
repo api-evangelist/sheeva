@@ -1,0 +1,50 @@
+generated: '2026-07-21'
+method: searched
+source: https://api-spec.sheeva.ai/ (SheevaConnect API Specification 2.0)
+summary: >-
+  Cross-cutting request/response semantics for the SheevaConnect partner API, captured from
+  the public API specification and derived from the OpenAPI. Bearer-token auth obtained from a
+  client-id/client-secret exchange, a mandatory program-code header on every call, URI-path
+  versioning (v2), offset/limit pagination, and HMAC-signed webhooks.
+authentication:
+  style: bearer-token
+  token_endpoint: GET /v2/auth
+  token_exchange: client-id + client-secret request headers returned as a JWT accessToken
+  request_header: Authorization
+  additional_required_header:
+    name: x-sheeva-program-code
+    note: Required on every partner-api call; value provisioned by Sheeva per program.
+  vehicle_events_auth:
+    note: The Vehicle Events ingest endpoint authenticates with clientId + x-sheeva-program-code headers (no bearer token).
+  see_also: authentication/sheeva-authentication.yml
+idempotency:
+  supported: false
+  note: No idempotency-key header or parameter is documented in the SheevaConnect specification.
+pagination:
+  style: offset-limit
+  params:
+    - offset
+    - limit
+  used_by:
+    - GET /v2/partner-apis/serviceHubs
+    - GET /v2/partner-apis/transactions
+versioning:
+  scheme: uri-path
+  current: v2
+  path_prefix: /v2/partner-apis
+regionalization:
+  note: Separate US and India hosts (us-apis / in-apis); some payment rails (UPI) are India-only.
+error_envelope:
+  content_type: application/json
+  shape: '{ "message": "<human-readable explanation>" }'
+  see_also: errors/sheeva-problem-types.yml
+webhooks:
+  supported: true
+  registration: POST /v2/partner-apis/webhooks/status-updates
+  signing: HMAC (hmacSigningKey supplied at registration); per-webhook apikey
+  see_also: asyncapi/sheeva-webhooks.yml
+demo_mode:
+  note: Payment and session operations accept a demoMode flag (0/1) to exercise flows without real settlement.
+  see_also: sandbox/sheeva-sandbox.yml
+rate_limiting:
+  documented: false

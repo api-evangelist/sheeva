@@ -1,0 +1,15 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for SheevaConnect API
+  version: 1.0.0
+extends: openapi/sheeva-openapi.yml
+actions:
+- target: $.info
+  update:
+    x-apievangelist-rating: 3
+    x-api-evangelist-provider: sheeva
+    x-source: Derived from the public SheevaConnect API Specification 2.0 Postman collection (api-spec.sheeva.ai).
+- target: $.info
+  update:
+    x-webhooks: SheevaConnect delivers session/payment status updates via HMAC-signed webhooks registered
+      at POST /v2/partner-apis/webhooks/status-updates.

@@ -1,20 +1,325 @@
 aid: sheeva
 name: Sheeva
-description: Sheeva is a company surfaced as a portfolio company of techstars and added to the API Evangelist
-  network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: >-
+  Sheeva.AI (legally Parkofon Inc.) builds transaction infrastructure for connected vehicles.
+  Its SheevaConnect platform lets a vehicle discover nearby Sheeva Pay outlets, authenticate the
+  driver, and pay for real-world services - fueling, EV charging, parking, tolling, QSR and
+  curbside pickup, and car wash - directly from the infotainment system, using patented location
+  intelligence (SheevaLocate, SheevaFence) and tokenized in-vehicle payments (SheevaPay). The
+  SheevaConnect partner API 2.0 exposes drivers, vehicles, sessions, service hubs, payments,
+  wallets and cards, loyalty, feedback, and HMAC-signed status webhooks across US and India regions.
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://cdn.prod.website-files.com/66e526d793f281dac248b0c4/677c3e75f423e08e3219b26e_SheevaLogowebclip.png
 url: https://raw.githubusercontent.com/api-evangelist/sheeva/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - techstars
-x-tier: stub
-x-tier-reason: portfolio-lead
+x-tier: profiled
+x-tier-reason: has-public-api
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-21'
+x-enrichment:
+  date: '2026-07-21'
+  status: enriched
+  artifacts_added: 21
+  pass: local-v1
 tags:
 - Company
-apis: []
+- Connected Vehicles
+- Automotive
+- Payments
+- Fintech
+- In-Vehicle Payments
+- EV Charging
+- Parking
+- Location Intelligence
+- Mobility
+apis:
+- aid: sheeva:sheeva-authentication-api
+  name: Sheeva Authentication API
+  description: The Authentication API from Sheeva — 1 operation(s) for authentication.
+  humanURL: https://api-spec.sheeva.ai/
+  baseURL: https://us-apis.sheeva.ai
+  tags:
+  - Authentication
+  properties:
+  - type: OpenAPI
+    url: openapi/sheeva-authentication-api-openapi.yml
+  - type: Postman
+    url: https://api-spec.sheeva.ai/
+  - type: APIReference
+    url: https://api-spec.sheeva.ai/
+  - type: Authentication
+    url: authentication/sheeva-authentication.yml
+  - type: Webhooks
+    url: asyncapi/sheeva-webhooks.yml
+- aid: sheeva:sheeva-credit-cards-api
+  name: Sheeva Credit Cards API
+  description: The Credit Cards API from Sheeva — 5 operation(s) for credit cards.
+  humanURL: https://api-spec.sheeva.ai/
+  baseURL: https://us-apis.sheeva.ai
+  tags:
+  - Credit Cards
+  properties:
+  - type: OpenAPI
+    url: openapi/sheeva-credit-cards-api-openapi.yml
+  - type: Postman
+    url: https://api-spec.sheeva.ai/
+  - type: APIReference
+    url: https://api-spec.sheeva.ai/
+  - type: Authentication
+    url: authentication/sheeva-authentication.yml
+  - type: Webhooks
+    url: asyncapi/sheeva-webhooks.yml
+- aid: sheeva:sheeva-driver-alerts-api
+  name: Sheeva Driver Alerts API
+  description: The Driver Alerts API from Sheeva — 2 operation(s) for driver alerts.
+  humanURL: https://api-spec.sheeva.ai/
+  baseURL: https://us-apis.sheeva.ai
+  tags:
+  - Driver Alerts
+  properties:
+  - type: OpenAPI
+    url: openapi/sheeva-driver-alerts-api-openapi.yml
+  - type: Postman
+    url: https://api-spec.sheeva.ai/
+  - type: APIReference
+    url: https://api-spec.sheeva.ai/
+  - type: Authentication
+    url: authentication/sheeva-authentication.yml
+  - type: Webhooks
+    url: asyncapi/sheeva-webhooks.yml
+- aid: sheeva:sheeva-driver-api
+  name: Sheeva Driver API
+  description: The Driver API from Sheeva — 5 operation(s) for driver.
+  humanURL: https://api-spec.sheeva.ai/
+  baseURL: https://us-apis.sheeva.ai
+  tags:
+  - Driver
+  properties:
+  - type: OpenAPI
+    url: openapi/sheeva-driver-api-openapi.yml
+  - type: Postman
+    url: https://api-spec.sheeva.ai/
+  - type: APIReference
+    url: https://api-spec.sheeva.ai/
+  - type: Authentication
+    url: authentication/sheeva-authentication.yml
+  - type: Webhooks
+    url: asyncapi/sheeva-webhooks.yml
+- aid: sheeva:sheeva-feedback-api
+  name: Sheeva Feedback API
+  description: The Feedback API from Sheeva — 3 operation(s) for feedback.
+  humanURL: https://api-spec.sheeva.ai/
+  baseURL: https://us-apis.sheeva.ai
+  tags:
+  - Feedback
+  properties:
+  - type: OpenAPI
+    url: openapi/sheeva-feedback-api-openapi.yml
+  - type: Postman
+    url: https://api-spec.sheeva.ai/
+  - type: APIReference
+    url: https://api-spec.sheeva.ai/
+  - type: Authentication
+    url: authentication/sheeva-authentication.yml
+  - type: Webhooks
+    url: asyncapi/sheeva-webhooks.yml
+- aid: sheeva:sheeva-loyalty-api
+  name: Sheeva Loyalty API
+  description: The Loyalty API from Sheeva — 2 operation(s) for loyalty.
+  humanURL: https://api-spec.sheeva.ai/
+  baseURL: https://us-apis.sheeva.ai
+  tags:
+  - Loyalty
+  properties:
+  - type: OpenAPI
+    url: openapi/sheeva-loyalty-api-openapi.yml
+  - type: Postman
+    url: https://api-spec.sheeva.ai/
+  - type: APIReference
+    url: https://api-spec.sheeva.ai/
+  - type: Authentication
+    url: authentication/sheeva-authentication.yml
+  - type: Webhooks
+    url: asyncapi/sheeva-webhooks.yml
+- aid: sheeva:sheeva-parking-api
+  name: Sheeva Parking API
+  description: The Parking API from Sheeva — 2 operation(s) for parking.
+  humanURL: https://api-spec.sheeva.ai/
+  baseURL: https://us-apis.sheeva.ai
+  tags:
+  - Parking
+  properties:
+  - type: OpenAPI
+    url: openapi/sheeva-parking-api-openapi.yml
+  - type: Postman
+    url: https://api-spec.sheeva.ai/
+  - type: APIReference
+    url: https://api-spec.sheeva.ai/
+  - type: Authentication
+    url: authentication/sheeva-authentication.yml
+  - type: Webhooks
+    url: asyncapi/sheeva-webhooks.yml
+- aid: sheeva:sheeva-payments-api
+  name: Sheeva Payments API
+  description: The Payments API from Sheeva — 3 operation(s) for payments.
+  humanURL: https://api-spec.sheeva.ai/
+  baseURL: https://us-apis.sheeva.ai
+  tags:
+  - Payments
+  properties:
+  - type: OpenAPI
+    url: openapi/sheeva-payments-api-openapi.yml
+  - type: Postman
+    url: https://api-spec.sheeva.ai/
+  - type: APIReference
+    url: https://api-spec.sheeva.ai/
+  - type: Authentication
+    url: authentication/sheeva-authentication.yml
+  - type: Webhooks
+    url: asyncapi/sheeva-webhooks.yml
+- aid: sheeva:sheeva-service-hubs-points-of-interest-api
+  name: Sheeva Service Hubs (Points Of Interest) API
+  description: >-
+    The Service Hubs (Points Of Interest) API from Sheeva — 2 operation(s) for service hubs (points of
+    interest).
+  humanURL: https://api-spec.sheeva.ai/
+  baseURL: https://us-apis.sheeva.ai
+  tags:
+  - Service Hubs (Points Of Interest)
+  properties:
+  - type: OpenAPI
+    url: openapi/sheeva-service-hubs-points-of-interest-api-openapi.yml
+  - type: Postman
+    url: https://api-spec.sheeva.ai/
+  - type: APIReference
+    url: https://api-spec.sheeva.ai/
+  - type: Authentication
+    url: authentication/sheeva-authentication.yml
+  - type: Webhooks
+    url: asyncapi/sheeva-webhooks.yml
+- aid: sheeva:sheeva-session-api
+  name: Sheeva Session API
+  description: The Session API from Sheeva — 7 operation(s) for session.
+  humanURL: https://api-spec.sheeva.ai/
+  baseURL: https://us-apis.sheeva.ai
+  tags:
+  - Session
+  properties:
+  - type: OpenAPI
+    url: openapi/sheeva-session-api-openapi.yml
+  - type: Postman
+    url: https://api-spec.sheeva.ai/
+  - type: APIReference
+    url: https://api-spec.sheeva.ai/
+  - type: Authentication
+    url: authentication/sheeva-authentication.yml
+  - type: Webhooks
+    url: asyncapi/sheeva-webhooks.yml
+- aid: sheeva:sheeva-transactions-api
+  name: Sheeva Transactions API
+  description: The Transactions API from Sheeva — 3 operation(s) for transactions.
+  humanURL: https://api-spec.sheeva.ai/
+  baseURL: https://us-apis.sheeva.ai
+  tags:
+  - Transactions
+  properties:
+  - type: OpenAPI
+    url: openapi/sheeva-transactions-api-openapi.yml
+  - type: Postman
+    url: https://api-spec.sheeva.ai/
+  - type: APIReference
+    url: https://api-spec.sheeva.ai/
+  - type: Authentication
+    url: authentication/sheeva-authentication.yml
+  - type: Webhooks
+    url: asyncapi/sheeva-webhooks.yml
+- aid: sheeva:sheeva-upi-api
+  name: Sheeva UPI API
+  description: The UPI API from Sheeva — 2 operation(s) for upi.
+  humanURL: https://api-spec.sheeva.ai/
+  baseURL: https://us-apis.sheeva.ai
+  tags:
+  - UPI
+  properties:
+  - type: OpenAPI
+    url: openapi/sheeva-upi-api-openapi.yml
+  - type: Postman
+    url: https://api-spec.sheeva.ai/
+  - type: APIReference
+    url: https://api-spec.sheeva.ai/
+  - type: Authentication
+    url: authentication/sheeva-authentication.yml
+  - type: Webhooks
+    url: asyncapi/sheeva-webhooks.yml
+- aid: sheeva:sheeva-vehicle-api
+  name: Sheeva Vehicle API
+  description: The Vehicle API from Sheeva — 3 operation(s) for vehicle.
+  humanURL: https://api-spec.sheeva.ai/
+  baseURL: https://us-apis.sheeva.ai
+  tags:
+  - Vehicle
+  properties:
+  - type: OpenAPI
+    url: openapi/sheeva-vehicle-api-openapi.yml
+  - type: Postman
+    url: https://api-spec.sheeva.ai/
+  - type: APIReference
+    url: https://api-spec.sheeva.ai/
+  - type: Authentication
+    url: authentication/sheeva-authentication.yml
+  - type: Webhooks
+    url: asyncapi/sheeva-webhooks.yml
+- aid: sheeva:sheeva-vehicle-events-api
+  name: Sheeva Vehicle Events API
+  description: The Vehicle Events API from Sheeva — 1 operation(s) for vehicle events.
+  humanURL: https://api-spec.sheeva.ai/
+  baseURL: https://us-apis.sheeva.ai
+  tags:
+  - Vehicle Events
+  properties:
+  - type: OpenAPI
+    url: openapi/sheeva-vehicle-events-api-openapi.yml
+  - type: Postman
+    url: https://api-spec.sheeva.ai/
+  - type: APIReference
+    url: https://api-spec.sheeva.ai/
+  - type: Authentication
+    url: authentication/sheeva-authentication.yml
+  - type: Webhooks
+    url: asyncapi/sheeva-webhooks.yml
+- aid: sheeva:sheeva-webhooks-api
+  name: Sheeva Webhooks API
+  description: The Webhooks API from Sheeva — 3 operation(s) for webhooks.
+  humanURL: https://api-spec.sheeva.ai/
+  baseURL: https://us-apis.sheeva.ai
+  tags:
+  - Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/sheeva-webhooks-api-openapi.yml
+  - type: Postman
+    url: https://api-spec.sheeva.ai/
+  - type: APIReference
+    url: https://api-spec.sheeva.ai/
+  - type: Authentication
+    url: authentication/sheeva-authentication.yml
+  - type: Webhooks
+    url: asyncapi/sheeva-webhooks.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -23,3 +328,57 @@ maintainers:
 common:
 - type: Website
   url: https://sheeva.ai/
+- type: DeveloperPortal
+  url: https://sheeva.ai/sheevaconnect-platform
+- type: Documentation
+  url: https://api-spec.sheeva.ai/
+- type: APIReference
+  url: https://api-spec.sheeva.ai/
+- type: Postman
+  url: https://api-spec.sheeva.ai/
+- type: Blog
+  url: https://sheeva.ai/blogs
+- type: Support
+  url: https://sheeva.ai/contact-us
+- type: SignUp
+  url: https://sheeva.ai/contact-us
+- type: TermsOfService
+  url: https://sheeva.ai/legal/terms-of-service
+- type: PrivacyPolicy
+  url: https://sheeva.ai/legal/privacy-policy
+- type: LinkedIn
+  url: https://www.linkedin.com/company/sheevaai/
+- type: YouTube
+  url: https://www.youtube.com/channel/UCgTP1ZcjfmfvAf_IxV1ucKQ
+- type: OpenAPI
+  url: openapi/sheeva-openapi.yml
+- type: Authentication
+  url: authentication/sheeva-authentication.yml
+- type: Webhooks
+  url: asyncapi/sheeva-webhooks.yml
+- type: MCPServer
+  url: mcp/sheeva-mcp.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: AgenticAccess
+  url: agentic-access/sheeva-agentic-access.yml
+- type: WellKnown
+  url: well-known/sheeva-well-known.yml
+- type: LLMsTxt
+  url: llms/sheeva-llms.txt
+- type: Overlay
+  url: overlays/sheeva-openapi-overlay.yaml
+- type: Conformance
+  url: conformance/sheeva-conformance.yml
+- type: ErrorCatalog
+  url: errors/sheeva-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/sheeva-lifecycle.yml
+- type: Conventions
+  url: conventions/sheeva-conventions.yml
+- type: DataModel
+  url: data-model/sheeva-data-model.yml
+- type: Sandbox
+  url: sandbox/sheeva-sandbox.yml
+- type: DomainSecurity
+  url: security/sheeva-domain-security.yml

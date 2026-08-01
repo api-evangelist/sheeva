@@ -1,0 +1,29 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/sheeva-openapi.yml + https://api-spec.sheeva.ai/
+note: >-
+  Cross-cutting standards conformance derived from the SheevaConnect OpenAPI and specification.
+  No published compliance certifications (SOC 2 / ISO 27001 / PCI DSS) were found on the site or
+  a trust center, so no Compliance pointer is asserted.
+standards:
+  - id: oauth2
+    conforms: false
+    evidence: Auth is a client-id/client-secret exchange returning a JWT bearer token, not an OAuth2 grant.
+  - id: bearer-token-jwt
+    conforms: true
+    evidence: GET /v2/auth returns a JWT accessToken presented in the Authorization header.
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: Errors return application/json with a "message" field, not application/problem+json.
+  - id: pagination-offset-limit
+    conforms: true
+    evidence: offset/limit query params on serviceHubs and transactions listings.
+  - id: webhooks-hmac-signed
+    conforms: true
+    evidence: Webhook registration supplies hmacSigningKey; deliveries are HMAC-signed.
+  - id: idempotency
+    conforms: false
+    evidence: No idempotency-key header/parameter documented.
+  - id: pci-dss
+    conforms: unknown
+    evidence: Handles card data (tokenized wallet, public-key card add) but no published PCI attestation located.

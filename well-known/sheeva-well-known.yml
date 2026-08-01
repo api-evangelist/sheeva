@@ -1,0 +1,14 @@
+generated: '2026-07-21'
+method: probed
+host: https://us-apis.sheeva.ai
+note: All /.well-known/* paths return 403 (host gates unauthenticated requests). sheeva.ai marketing host
+  returns 404 for security.txt. No public discovery documents.
+documents:
+- path: /.well-known/security.txt
+  status: 403
+- path: /.well-known/openid-configuration
+  status: 403
+- path: /.well-known/oauth-authorization-server
+  status: 403
+- path: /.well-known/api-catalog
+  status: 403

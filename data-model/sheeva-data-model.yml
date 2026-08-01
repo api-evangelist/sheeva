@@ -1,0 +1,78 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/sheeva-openapi.yml
+note: >-
+  Entity-relationship graph derived from the SheevaConnect OpenAPI paths, request/response
+  bodies, and id-reference fields (driverId, vin, sessionId, walletId, cardId, serviceHubId,
+  loyaltyProgramId). Id prefixes observed in example payloads are recorded where present.
+entities:
+  - name: Driver
+    id_field: driverId
+    id_prefix: dri_partner_
+    key_fields: [countryCode, phoneNumber, firstName, lastName, email, addressDetails]
+    relationships:
+      - has_many: Vehicle
+        via: link (driver<->vehicle association)
+      - has_many: Session
+        via: driverId
+      - has_many: Transaction
+        via: driverId
+  - name: Vehicle
+    id_field: vin
+    key_fields: [vin, licensePlate, make, model, year, fuelTypes, connectorType]
+    relationships:
+      - has_many: Driver
+        via: vin/drivers
+      - has_many: Session
+        via: vin
+      - has_one: Wallet
+        via: vin
+  - name: Session
+    id_field: sessionId
+    key_fields: [serviceType, status]
+    relationships:
+      - belongs_to: Vehicle
+        via: vin
+      - has_one: Transaction
+        via: sessionId
+      - belongs_to: ServiceHub
+        via: serviceHubId
+  - name: ServiceHub
+    id_field: serviceHubId
+    description: Point of interest (fuel station, EV charger, parking lot) enabled for Sheeva Pay.
+    key_fields: [latitude, longitude, serviceType, serviceProviderCode]
+  - name: Wallet
+    id_field: walletId
+    relationships:
+      - belongs_to: Vehicle
+        via: vin
+      - has_many: CreditCard
+        via: cards
+  - name: CreditCard
+    id_field: cardId
+    id_prefix: card_
+    relationships:
+      - belongs_to: Wallet
+        via: walletId
+  - name: Transaction
+    id_field: transactionId
+    id_prefix: pay_
+    relationships:
+      - belongs_to: Session
+        via: sessionId
+  - name: Payment
+    key_fields: [purchaseAmount, paymentInstruments, demoMode]
+    relationships:
+      - belongs_to: Session
+        via: sessionId
+  - name: LoyaltyProgram
+    id_field: loyaltyProgramId
+    id_prefix: loyalty_
+    relationships:
+      - belongs_to: Driver
+        via: driverId
+  - name: Webhook
+    id_field: webhook-id
+    key_fields: [webhookUrl, hmacSigningKey, apikey]
+  - name: Feedback
+    key_fields: [driverId, serviceType, reason]

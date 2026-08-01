@@ -1,0 +1,28 @@
+generated: '2026-07-21'
+method: searched
+source: https://api-spec.sheeva.ai/ (SheevaConnect API Specification 2.0 — Webhooks + Vehicle Events)
+spec_type: Webhooks
+summary: >-
+  SheevaConnect delivers session and payment status updates to partner-registered webhook
+  endpoints. Deliveries are signed with an HMAC key supplied at registration. This is a webhook
+  catalog, not a published AsyncAPI document.
+delivery:
+  registration: POST /v2/partner-apis/webhooks/status-updates
+  list: GET /v2/partner-apis/webhooks
+  delete: DELETE /v2/partner-apis/webhooks/{webhook-id}
+  registration_payload:
+    webhookUrl: partner HTTPS endpoint that receives status updates
+    hmacSigningKey: shared secret used to HMAC-sign each delivery
+    apikey: per-webhook api key echoed on delivery
+  signature: HMAC over the payload using hmacSigningKey
+events:
+  - name: session-status-update
+    description: Session lifecycle transitions (LOW_FUEL_DETECTED ... SERVICE_COMPLETE / SERVICE_CANCELLED_BY_DRIVER).
+    enum_source: errors/sheeva-problem-types.yml#session_status_codes
+  - name: payment-status-update
+    description: Payment lifecycle transitions (PAYMENT_AUTHORIZED / PAYMENT_COMPLETE / PAYMENT_FAILED / PAYMENT_VOIDED / PAYMENT_REFUNDED).
+    enum_source: errors/sheeva-problem-types.yml#payment_status_codes
+ingest:
+  note: >-
+    Separate inbound channel — partners/OEMs push telemetry (speed, fuelLevel, chargingLevel,
+    ignition, transmission) to POST /vehicle-events on the vehicle-events host to drive session detection.

@@ -1,0 +1,25 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/sheeva-openapi.yml
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - header
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  description: Access token obtained from GET /v2/auth (exchange client-id/client-secret), sent
+    in the Authorization header.
+  sources:
+  - openapi/sheeva-openapi.yml
+- name: clientCredentials
+  type: apiKey
+  in: header
+  parameter: client-id
+  description: client-id + client-secret headers on GET /v2/auth to obtain an access token.
+  sources:
+  - openapi/sheeva-openapi.yml

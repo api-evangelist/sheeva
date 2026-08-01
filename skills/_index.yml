@@ -1,0 +1,21 @@
+generated: '2026-07-21'
+method: generated
+source: openapi/sheeva-openapi.yml
+note: Packaged operating instructions per marquee SheevaConnect flow; every step is grounded in a real operationId from the OpenAPI.
+skills:
+  - file: sheeva-onboard-driver-and-vehicle.md
+    name: Onboard a driver and vehicle
+    api: openapi/sheeva-openapi.yml
+    operations: [authentication, registerDriver, registerVehicle, linkDriverToAVehicle, markDriverAsCurrentDriverForAVehicle]
+  - file: sheeva-fuel-session-and-pay.md
+    name: Run a fueling session and pay
+    api: openapi/sheeva-openapi.yml
+    operations: [getServiceHubs, getCurrentlyActiveSessions, confirmServicePoint, authorizePayment, markServiceComplete]
+  - file: sheeva-wallet-add-card.md
+    name: Add a credit card to a vehicle wallet
+    api: openapi/sheeva-openapi.yml
+    operations: [1GetVehicleWallet, 2GeneratePublicKeyToAddCreditCard, 3AddCreditCardToAWallet, 6MarkCreditCardAsDefault]
+  - file: sheeva-register-status-webhook.md
+    name: Register a status webhook
+    api: openapi/sheeva-openapi.yml
+    operations: [registerStatusWebhook, getRegisteredWebHooks, deleteAWebHook]

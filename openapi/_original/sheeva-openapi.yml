@@ -1,0 +1,2590 @@
+# generated: '2026-07-21'
+# method: derived
+# source: https://api-spec.sheeva.ai/ (public SheevaConnect API Specification 2.0 Postman collection)
+openapi: 3.0.3
+info:
+  title: SheevaConnect API
+  version: '2.0'
+  description: 'This SheevaConnect™ API Specification 2.0 is © 2024 Parkofon Inc. (d/b/a Sheeva.AI) and
+    is proprietary information that may not be duplicated, redistributed, form the basis of derivative
+    works, or publicly performed/displayed without the expressed written permission of Sheeva.AI. If you
+    wish to use the SheevaConnect™ API Specification 2.0 and use the SheevaConnect™ cloud platform, please
+    contact Sheeva.AI for a license.
+
+    SheevaConnect APIs enable connected vehicle payments & last-mile services for various use cases including
+    Fueling, EV Charging, Parking and Retail. This solution allows automated & contactless payment in
+    addition to proactive identification of user needs and last-mile navigation to the nearest Sheeva
+    Pay enabled outlets.
+
+    All APIs follow HTTP status codes, return HTTP 200 OK when successful and following HTTP errors with
+    a message. The message is self explaining to indicate the error in request. The example error codes
+    include :
+
+
+
+
+    Error Code
+
+    Message
+
+
+
+
+
+    400
+
+    Bad Request : Check the parameter values
+
+
+
+    404
+
+    Resource not found
+
+
+
+    500
+
+    Internal Server Error
+
+
+
+
+    SheevaConnect creates a session when system detects that vehicle requires a service (FUEL, CHARGING,
+    PARKING). Each session goes through various statuses.
+
+    Session Status Codes
+
+
+
+
+    Status
+
+    Description
+
+
+
+
+
+    LOW_FUEL_DETECTED
+
+    If vehicle was low on fuel and system has sent the notification to driver for low fuel or if vehicle
+    is not low on fuel but driver clicks on fuel icon to pay.
+
+
+
+    LOW_CHARGE_DETECTED
+
+    If vehicle was low on charge and system has sent the notification to driver for low charged or if
+    vehicle is not low on chrage but driver clicks on charge icon to pay.
+
+
+
+    AT_SERVICE_HUB
+
+    The driver has reached the fuel station / EV charge station / etc.
+
+
+
+    AT_SERVICE_POINT
+
+    The driver is at fuel pump / charging bay.
+
+
+
+    SERVICE_POINT_CONFIRMED
+
+    Driver confirms the fuel pump / charging bay.
+
+
+
+    SERVICE_IN_PROGRESS
+
+    When driver uses a parking service and vehicle is parked
+
+
+
+    SERVICE_COMPLETE
+
+    When user marks the fuel, charging, parking complete
+
+
+
+    SERVICE_CANCELLED_BY_DRIVER
+
+    When user cancel the service at the pump/ charging bay
+
+
+
+    SERVICE_ABORTED_BY_SYSTEM
+
+    When user does opt for service and move away from fuel pump/ charging bay
+
+
+
+
+    Payment Status Codes
+
+
+
+
+    Status
+
+    Description
+
+
+
+
+
+    PAYMENT_AUTHORIZED
+
+    When a payment is authorized. Only applicable for Credit Card, Wallet and Rewards.
+
+
+
+    PAYMENT_INITIATED
+
+    When a payment is in progress. Only applicable for UPI in India.
+
+
+
+    PAYMENT_COMPLETE
+
+    Payment has been processed for a g'
+  contact:
+    name: Sheeva.AI
+    url: https://sheeva.ai/contact-us
+  x-company: Parkofon Inc. (d/b/a Sheeva.AI)
+servers:
+- url: https://us-apis.sheeva.ai
+  description: Production (USA)
+- url: https://in-apis.sheeva.ai
+  description: Production (India)
+- url: https://dev-us-apis.sheeva.ai
+  description: Sandbox (USA)
+- url: https://dev-in-apis.sheeva.ai
+  description: Sandbox (India)
+tags:
+- name: Authentication
+- name: Vehicle Events
+- name: Account Management
+- name: Driver
+- name: Vehicle
+- name: Driver Alerts
+- name: Session
+- name: Service Hubs (Points Of Interest)
+- name: Services
+- name: Parking
+- name: Payments
+- name: UPI
+- name: Transactions
+- name: Credit Cards
+- name: Webhooks
+- name: Loyalty
+- name: Feedback
+- name: Advertisements
+- name: Promotions
+- name: Discounts
+paths:
+  /v2/auth:
+    get:
+      summary: Authentication
+      operationId: authentication
+      tags:
+      - Authentication
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              example:
+                status: success
+                accessToken: eyJraWQiOiJDTUpFa3VnQ3N5NkZDNW1ONGJzZThaK3FmaUE5TUhOTEZcL2FzbWMxYVNBTT0iLCJhbGciOiJSUzI1NiJ9.eyJvcmlnaW5fanRpIjoiYTQ5NTgwZTYtZjMwNS00Y2FiLTg5ZjgtZjBmZTVkODMwZjE0Iiwic3ViIjoiODJmYjk0NmItYTlkOC00ZDFkLThmZjAtNjg2OWZiOTkyMDExIiwiYXVkIjoiN3Zvb3Ixcmg1ZGdvOTR0cG8zOGlhbnAyZW0iLCJldmVudF9pZCI6IjRiMDE5OWE3LTA5MDMtNGQwNC05MmRiLWQ4ZmQ2NmNhODJkNyIsInRva2VuX3VzZSI6ImlkIiwiYXV0aF90aW1lIjoxNjY5Mzg5MDY2LCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAuYXAtc291dGgtMS5hbWF6b25hd3MuY29tXC9hcC1zb3V0aC0xX0ZNMVp6aVlZRCIsImNvZ25pdG86dXNlcm5hbWUiOiJ4YXZmazc2ampoemVteXVxZXNxbGFhZjgybnN2bXJkYSIsImV4cCI6MTY2OTM5MjY2NiwiaWF0IjoxNjY5Mzg5MDY2LCJqdGkiOiJlM2IwZmI5NC01MmNmLTQyMjUtYWJjOC1kZGUzZmU0NzRiNWEifQ.h0-3V-VXIspFaXPRLvxHOxM_-J5wba6gPvKB7djTLEkja6OVnAIr3O4RfW96AcII7-ybCziVtqXc-6hUXMw9eLrrHNwO_5MHK6S89XQaMCU75ySLCuQzF9M_hgq8m7pIuEEuvVr8g0LbYNZ3aIMlCwuVsWS16gMgbJUH9yHx1K1jNs3hAg0OmeZHl6NF39LcU7gsB_U4t1s__t-vhy534FiC-eCSHzRjpcsBEWHGSaizP_7BUb3jmtLKdOUbuTDebGtPB9ZCVQqVdZu4sLcdLMYZ3hBnfSdCjQtQMNfk4m7d24HbDV_T5aDuqN8s5r1_FPSbLWw354xEv1_vSo3luQ
+                expiresIn: 3600
+      description: 'The authentication service endpoint is used to get an access token, which must be
+        sent with each call as a Bearer Token.
+
+        If successful, returns: HTTP 200 OK.
+
+        '
+      parameters:
+      - name: client-id
+        in: header
+        required: true
+        schema:
+          type: string
+        description: '<p>Assigned by Sheeva.AI</p>
+
+          '
+      - name: client-secret
+        in: header
+        required: true
+        schema:
+          type: string
+        description: '<p>Assigned by Sheeva.AI</p>
+
+          '
+  /vehicle-events:
+    post:
+      summary: Vehicle Events
+      operationId: vehicleEvents
+      tags:
+      - Vehicle Events
+      responses:
+        '200':
+          description: Response
+      description: 'This request accepts vehicle status for multiple vehicles, which includes current
+        vehicle location, fuel / charge level, speed, parking brake and ignition status.
+
+        If successful, returns: HTTP 201 CREATED.
+
+        Note: This replaces the older "Vehicle Events" endpoint. Use this instead.
+
+        '
+      parameters:
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+      - name: clientId
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+      requestBody:
+        content:
+          application/json:
+            example:
+            - vin: TSTLRGBL663PR2127
+              statuses:
+              - key: speed
+                value: '30.5'
+                timestamp: 1685619240
+              - key: fuelLevel
+                value: '6'
+                timestamp: 1685619240
+              - key: chargingLevel
+                value: '6'
+                timestamp: 1685619240
+              - key: ignition
+                value: 'on'
+                timestamp: 1685619240
+              location:
+                latitude: 38.9263669701
+                longitude: -77.2406171718
+                timestamp: 1685619240
+  /v2/partner-apis/drivers:
+    post:
+      summary: Register Driver
+      operationId: registerDriver
+      tags:
+      - Driver
+      responses:
+        '201':
+          description: OK
+          content:
+            application/json:
+              example:
+                countryCode: '91'
+                phoneNumber: '5556789999'
+                firstName: John
+                lastName: Smith
+                email: jsmith@email.com
+                driverId: dri_partner_B8vR4R4vFsDoX3sg3W7z
+                salutation: Mr.
+                addressDetails:
+                  address1: 1234 S 32 Birla Towers
+                  address2: Jagat Nagar
+                  city: New Delhi
+                  district: Okhla
+                  state: Delhi
+                  postalCode: '249408'
+      description: 'This request allows to add a driver profile.
+
+        If successful, returns: HTTP 201 CREATED.
+
+        '
+      parameters:
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+      requestBody:
+        content:
+          application/json:
+            example:
+              countryCode: '1'
+              phoneNumber: '81342424242'
+              email: jdoe@email.com
+              firstName: John
+              lastName: Doe
+              birthDate: 21-05-1981
+              gender: Male
+              postalCode: '249408'
+              driverId: dri_partner_B8vR4R4vFsDoX3sg3W7z
+              salutation: Mr.
+              city: New Delhi
+              district: Okhla
+              state: Delhi
+              address1: 1234 S 32 Birla Towers
+              address2: Jagat Nagar
+  /v2/partner-apis/drivers/{driverId}:
+    get:
+      summary: Get List of Linked Vehicles to a Driver (Deprecated)
+      operationId: getListOfLinkedVehiclesToADriver
+      tags:
+      - Driver
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              example:
+                phoneNumber: '8134242424'
+                countryCode: '1'
+                firstName: John
+                lastName: Doe
+                email: john.doe@gmail.com
+                driverId: dri_partner_B8vR4R4vFsDoX3sg3W7z
+                active: true
+      parameters:
+      - name: driverId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+    patch:
+      summary: Update Driver
+      operationId: updateDriver
+      tags:
+      - Driver
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              example:
+                countryCode: '1'
+                phoneNumber: '5556789999'
+                firstName: John
+                lastName: Smith
+                email: jsmith@email.com
+                driverId: dri_partner_B8vR4R4vFsDoX3sg3W7z
+                active: true
+                salutation: Mr.
+                addressDetails:
+                  address1: 1234 S 32 Birla Towers
+                  address2: Jagat Nagar
+                  city: New Delhi
+                  district: Okhla
+                  state: Delhi
+                  postalCode: '249408'
+                referralPhoneNumber: '8290808122'
+                referralCode: POIQWE123
+                referredByMerchant: '123454321'
+                referredByFSM: '9908083242'
+      description: 'This request allows you to update details of a driver profile.
+
+        If successful, returns HTTP 200 OK.
+
+        '
+      parameters:
+      - name: driverId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+      requestBody:
+        content:
+          application/json:
+            example:
+              countryCode: '1'
+              phoneNumber: '81342424242'
+              email: jdoe@gmail.com
+              firstName: John
+              lastName: Doe
+              active: true
+              salutation: Mr.
+              referralPhoneNumber: '8290808122'
+              referralCode: POIQWE123
+              city: New Delhi
+              district: Okhla
+              state: Delhi
+              address1: 1234 S 32 Birla Towers
+              address2: Jagat Nagar
+              postalCode: '249408'
+              referredByMerchant: '123454321'
+              referredByFSM: '9908083242'
+  /v2/partner-apis/drivers/{driverId}/details:
+    get:
+      summary: Get Driver Details
+      operationId: getDriverDetails
+      tags:
+      - Driver
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              example:
+                driver:
+                  countryCode: '1'
+                  phoneNumber: '8134242424'
+                  email: john.doe@gmail.com
+                  firstName: John
+                  lastName: Doe
+                  driverId: dri_partner_B8vR4R4vFsDoX3sg3W7z
+                  active: true
+                  salutation: Mr.
+                  referralPhoneNumber: '8290808122'
+                  referralCode: POIQWE123
+                  addressDetails:
+                    address1: 1234 S 32 Birla Towers
+                    address2: Jagat Nagar
+                    city: New Delhi
+                    district: Okhla
+                    state: Delhi
+                    postalCode: '249408'
+                  referredByMerchant: '123454321'
+                  referredByFSM: '9908083242'
+                pairedVehicles:
+                - vin: WBA33AG07PCM25883
+                  licensePlate: ABI712G
+                  make: BMW
+                  model: 530e
+                  year: '2023'
+                  color: RED
+                  fuelTypes:
+                  - PETROL
+                  - ELECTRIC
+                  connectorType: J1772
+                  active: true
+                  registrationCertificateDueOn: 21-05-2024
+                  pucDueOn: 15-05-2024
+                  insuranceDueOn: 17-09-2024
+                  vehicleServiceDueOn: 21-12-2024
+                activeSessions:
+                - serviceType: PARKING
+                  id: AYABeImAH0a9_i6wb32thzMkTYQAHQABAAdTZXJ2aWNlABBDb2duaXRvVXNlclBvb2xzAAEAB2F3cy1rbXMATGFybjphd3M6a21zOmFwLXNvd...
+                - serviceType: CHARGING
+                  id: AYABeImAH0a9_i6wb32thzMkTYQAHQABAAdTZXJ2aWNlABBDb2duaXRvVXNlclBvb2xzAAEAB2F3cy1rbXMATGFybjphd3M6a21zOmFwLdsgsgsg...
+      description: 'This request returns driver details, associated vehicles and any active sessions.
+        This is a convinience request that combines the resources: driver, vehicle, and a possible array
+        of sessions.
+
+        If successful, returns: HTTP 200 OK.
+
+        '
+      parameters:
+      - name: driverId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+  /v2/partner-apis/drivers/{driverId}/link:
+    post:
+      summary: Link Driver to a Vehicle
+      operationId: linkDriverToAVehicle
+      tags:
+      - Driver
+      responses:
+        '201':
+          description: Created
+      description: 'This API allows drivers to be paired with one of the vehicles. Once paired, this driver
+        would be sent all notifications for this vehicle.
+
+        If successful, returns: HTTP 201 CREATED.
+
+        '
+      parameters:
+      - name: driverId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+    delete:
+      summary: Unlink Driver from a Vehicle
+      operationId: unlinkDriverFromAVehicle
+      tags:
+      - Driver
+      responses:
+        '200':
+          description: OK
+      description: 'This API allows drivers to unpair an already paired vehicle. Once unpaired, this driver
+        would no longer be sent any notifications for this vehicle.
+
+        If successful, returns: HTTP 200 OK.
+
+        '
+      parameters:
+      - name: driverId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+  /v2/partner-apis/drivers/{driverId}/drive:
+    post:
+      summary: Mark Driver as current Driver for a Vehicle
+      operationId: markDriverAsCurrentDriverForAVehicle
+      tags:
+      - Driver
+      responses:
+        '201':
+          description: Response
+      description: 'This request allows to mark the driver as current driver for the Vehicle
+
+        If successful, returns: HTTP 201 CREATED.
+
+        '
+      parameters:
+      - name: driverId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+    delete:
+      summary: Remove Driver as Current driver for a vehicle
+      operationId: removeDriverAsCurrentDriverForAVehicle
+      tags:
+      - Driver
+      responses:
+        '200':
+          description: Response
+      description: 'This request allows to unmark the driver as current driver for the Vehicle
+
+        if successful it will return HTTP Status Code 200
+
+        '
+      parameters:
+      - name: driverId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+  /v2/partner-apis/vehicles:
+    get:
+      summary: Search Vehicles
+      operationId: searchVehicles
+      tags:
+      - Vehicle
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              example:
+              - vin: WBA33AG07PCM25883
+                licensePlate: ABI712G
+                make: BMW
+                model: 530e
+                year: '2023'
+                color: RED
+                fuelTypes:
+                - PETROL
+                - ELECTRIC
+                connectorType: J1772
+                active: true
+              - vin: WP0CB298X4U661674
+                licensePlate: SDM606E
+                make: Porsche
+                model: Boxster
+                year: '2004'
+                color: YELLOW
+                fuelTypes:
+                - PETROL
+                active: true
+              - vin: WBY43AW04PFP67880
+                licensePlate: Y657567
+                make: BMW
+                model: i4 eDrive35
+                year: '2023'
+                color: WHITE
+                fuelTypes:
+                - ELECTRIC
+                connectorType: J1772
+                active: true
+      description: 'This request returns vehicles that match the criteria provided in the query parameters.
+        Returns an array of vehicles matching any search criteria. If no matches were found, returns an
+        empty array.
+
+        If successful, returns: HTTP 200 OK.
+
+        '
+      parameters:
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+    post:
+      summary: Register Vehicle
+      operationId: registerVehicle
+      tags:
+      - Vehicle
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              example:
+                vin: WBA33AG07PCM25883
+                licensePlate: MH 01 AB 1234
+                make: BMW
+                model: 530e
+                year: '2023'
+                color: RED
+                fuelTypes:
+                - PETROL
+                - ELECTRIC
+                connectorType: J1772
+                active: true
+                registrationCertificateDueOn: 21-05-2024
+                pucDueOn: 15-05-2024
+                insuranceDueOn: 17-09-2024
+                vehicleServiceDueOn: 21-12-2024
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              example:
+                vin: WBA33AG07PCM25883
+                licensePlate: MH 01 AB 1234
+                make: BMW
+                model: 530e
+                year: '2023'
+                color: RED
+                fuelTypes:
+                - PETROL
+                - ELECTRIC
+                connectorType: J1772
+                programCode: program.code
+                active: true
+      description: 'This request allows you to register a vehicle.
+
+        If the vehicle was not previously added and successfully added, the endpoint returns: HTTP 201
+        CREATED.
+
+        If the vehicle is already registered (i.e., same VIN and license plate), the endpoint returns:
+        HTTP 409 CONFLICT along with the existing vehicle in the response. The existing vehicle''s id
+        is also present in the Location header.
+
+        '
+      parameters:
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+      requestBody:
+        content:
+          application/json:
+            example:
+              vin: WBA33AG07PCM25883
+              licensePlate: MH 01 AB 1234
+              make: BMW
+              model: 530e
+              year: '2023'
+              color: RED
+              fuelTypes:
+              - PETROL
+              - ELECTRIC
+              connectorType: J1772
+              active: true
+              registrationCertificateDueOn: 21-05-2024
+              pucDueOn: 15-05-2024
+              insuranceDueOn: 17-09-2024
+              vehicleServiceDueOn: 21-12-2024
+              demoMode: 0
+  /v2/partner-apis/vehicles/{vin}:
+    get:
+      summary: Get a Vehicle
+      operationId: getAVehicle
+      tags:
+      - Vehicle
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              example:
+                vin: WBA33AG07PCM25883
+                licensePlate: ABC123
+                make: BMW
+                model: 530e
+                year: '2023'
+                color: RED
+                fuelTypes:
+                - PETROL
+                - ELECTRIC
+                connectorType: J1772
+                active: true
+                registrationCertificateDueOn: 21-05-2024
+                pucDueOn: 15-05-2024
+                insuranceDueOn: 17-09-2024
+                vehicleServiceDueOn: 21-12-2024
+      description: 'This request allows you fetch a vehicle based on the vehicle identifier.
+
+        If successful, returns HTTP 200 OK.
+
+        If vehicle identifier is not found, returns HTTP 404 NOT FOUND.
+
+        '
+      parameters:
+      - name: vin
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+    patch:
+      summary: Update Vehicle
+      operationId: updateVehicle
+      tags:
+      - Vehicle
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              example:
+                vin: WBA33AG07PCM25883
+                licensePlate: MH 01 AB 1234
+                make: BMW
+                model: 530e
+                year: '2023'
+                color: RED
+                fuelTypes:
+                - PETROL
+                - ELECTRIC
+                connectorType: J1772
+                active: true
+                registrationCertificateDueOn: 21-05-2024
+                pucDueOn: 15-05-2024
+                insuranceDueOn: 17-09-2024
+                vehicleServiceDueOn: 21-12-2024
+      description: 'This request allows you to update details of a vehicle.
+
+        If successful, returns HTTP 200 OK.
+
+        '
+      parameters:
+      - name: vin
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+      requestBody:
+        content:
+          application/json:
+            example:
+              licensePlate: MH 01 AB 1234
+              make: BMW
+              model: 530e
+              year: '2023'
+              color: RED
+              fuelTypes:
+              - PETROL
+              - ELECTRIC
+              connectorType: J1772
+              active: true
+              registrationCertificateDueOn: 21-05-2024
+              pucDueOn: 15-05-2024
+              insuranceDueOn: 17-09-2024
+              vehicleServiceDueOn: 21-12-2024
+              demoMode: 0
+  /v2/partner-apis/vehicles/{vin}/drivers:
+    get:
+      summary: Get Drivers by VIN
+      operationId: getDriversByVin
+      tags:
+      - Vehicle
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              example:
+                licensePlate: MH 01 AA 0001
+                make: JEEP
+                model: Compass
+                year: '2023'
+                color: RED
+                fuelTypes:
+                - PETROL
+                connectorType: OBD2
+                active: true
+                driving: false
+                drivers:
+                - phoneNumber: '9898989898'
+                  countryCode: '91'
+                  firstName: John
+                  lastName: Den
+                  email: jden@gmail.com
+                  driverId: dri_partner_ndga2jbavWtdJB6gT9Jl
+                  active: true
+                vin: MCAAJPBH3JFA12345
+      parameters:
+      - name: vin
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+  /v2/partner-apis/alerts:
+    post:
+      summary: Update Alert Preference
+      operationId: updateAlertPreference
+      tags:
+      - Driver Alerts
+      responses:
+        '200':
+          description: OK
+      parameters:
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+      requestBody:
+        content:
+          application/json:
+            example:
+              lowFuelAlertThreshold: 25
+              lowChargeAlertThreshold: 30
+              chargeCompleteThreshold: 80
+  /v2/partner-apis/alerts/:
+    get:
+      summary: Get Alert Preference
+      operationId: getAlertPreference
+      tags:
+      - Driver Alerts
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              example:
+                lowFuelAlertThreshold: 25
+                lowChargeAlertThreshold: 30
+                chargeCompleteThreshold: 80
+      parameters:
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+      requestBody:
+        content:
+          application/json:
+            example:
+              lowFuelAlertThreshold: 25
+              lowChargeAlertThreshold: 30
+              chargeCompleteThreshold: 80
+  /v2/partner-apis/sessions/current-session:
+    get:
+      summary: Get Currently Active Sessions
+      operationId: getCurrentlyActiveSessions
+      tags:
+      - Session
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              example:
+                vehicleLocation:
+                  latitude: 19.16323715308841
+                  longitude: 72.85860447032306
+                  timestamp: 1668531651000
+                activeSessions:
+                - id: parking_payments_14141asdqwe
+                  currentState: CONFIRMED
+                  paymentStatus: PAYMENT_COMPLETED
+                  serviceType: PARKING
+      description: "This request returns current fuel session state and details if there is any session\
+        \ with the specified type actively running in the system.\nIf successful, returns: HTTP 200 OK.\n\
+        Response Body Field Description:\n\n\n\nField\nDescription\n\n\n\n\nvehicleLocation\nCurrent vehicle\
+        \ location  latitude, longitude, timestamp ( in EPOCH )\n\n\nactiveSessions\nArray of active session(s)\
+        \ for the the vehicle - if there is any, otherwise it will come as empty\n\n\nactiveSessions[0].id\n\
+        Unique service hub identifier  \n\n\nactiveSessions[0].currentState\nCurrent state of the session\
+        \  e.g. LOW_FUEL_DETECTED, AT_SERVICE_HUB\n\n\nactiveSessions[0].serviceType\nType of the service\
+        \ for which the session is created  FUEL, CHARGING, PARKING, TOLL\n\n\n\n"
+      parameters:
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+  /v2/partner-apis/sessions/{sessionId}:
+    get:
+      summary: Get Details of a Session
+      operationId: getDetailsOfASession
+      tags:
+      - Session
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              example:
+                vehicleLocation:
+                  latitude: 33.02031165
+                  longitude: -96.83407293
+                  timestamp: 1719587666391
+                session:
+                  id: parking_UbnAGCt2fQItXcZHsrE8
+                  currentState: SERVICE_COMPLETE
+                  serviceType: PARKING
+                  startTime: '2024-06-19 12:04:00'
+                  endTime: '2024-06-19 13:04:00'
+                  paymentStatus: COMPLETED
+                  paymentInstrument:
+                    type: CREDIT_CARD
+                    id: pay_xzsN38mYF7zoMHqoO8iv
+                    amount: 24.0
+                serviceHub:
+                  paymentInstrument:
+                    type: CREDIT_CARD
+                    id: pay_xzsN38mYF7zoMHqoO8iv
+                    amount: 24.0
+                  displayName: Marina Lot 9
+                  currency: USD
+                  location: 33.982403360821465,-118.4560913004027
+                  addressDetails:
+                    city: N/A
+                    state: N/A
+                    zipCode: N/A
+                    country: N/A
+                    streetAddress: N/A
+                  amenities:
+                  - Convenience Store
+                  - Free Air
+                  - Washrooms
+                  promotions:
+                  - name: Reward Days
+                    category: PARKING
+                    discount: N/A
+                    mediaURL: https://example.com/abc.jpg
+                  polygon: 33.982144 -118.455279;33.982945 -118.456666;33.982662 -118.456904;33.981964
+                    -118.455694;33.982008 -118.455657;33.981974 -118.455600;33.981971 -118.455538;33.981993
+                    -118.455475;33.982082 -118.455331;33.982144 -118.455279
+                  timezone: America/Los_Angeles
+                  openingHours:
+                  - day: '1'
+                    hours:
+                    - 5:00 - 22:00
+                  - day: '2'
+                    hours:
+                    - 5:00 - 22:00
+                  - day: '3'
+                    hours:
+                    - 5:00 - 22:00
+                  - day: '4'
+                    hours:
+                    - 5:00 - 22:00
+                  - day: '5'
+                    hours:
+                    - 5:00 - 22:00
+                  - day: '6'
+                    hours:
+                    - 6:00 - 22:00
+                  - day: '7'
+                    hours:
+                    - 8:00 - 22:00
+                  id: '1100053'
+      parameters:
+      - name: sessionId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+  /v2/partner-apis/sessions/{sessionId}/rating:
+    post:
+      summary: Collect Rating for Completed Session
+      operationId: collectRatingForCompletedSession
+      tags:
+      - Session
+      responses:
+        '201':
+          description: Created
+      description: 'This API takes in the star rating for a given session and stores it on session and
+        also against service hub (for example fuel station).
+
+        API will return HTTP Status Code 201
+
+        '
+      parameters:
+      - name: sessionId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+      requestBody:
+        content:
+          application/json:
+            example:
+              comments: Feedback of the customer about the service hub
+  /v2/partner-apis/sessions/{sessionId}/confirm-service-point:
+    post:
+      summary: Confirm Service Point
+      operationId: confirmServicePoint
+      tags:
+      - Session
+      responses:
+        '200':
+          description: Response
+      description: 'API to confirm the service point associated with service.
+
+
+        Fuel Pump in case of serviceType = "FUEL"
+
+        Charging connector in case of serviceType = "CHARGING"
+
+        Parking lot in case of serviceType = "PARKING"
+
+
+        Sending demoMode=1 would run a transaction with fake payment and will not activate the pump, charger
+        or the parking lot. This helps with simulated testing in the sandbox / development.
+
+        '
+      parameters:
+      - name: sessionId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+      requestBody:
+        content:
+          application/json:
+            example:
+              servicePointId: '1'
+              parking:
+                duration: 30
+  /v2/partner-apis/sessions/{sessionId}/mark-service-complete:
+    post:
+      summary: Mark Service Complete
+      operationId: markServiceComplete
+      tags:
+      - Session
+      responses:
+        '201':
+          description: Response
+      description: 'NOTE: This api is applicable for serviceType="PARKING"
+
+        '
+      parameters:
+      - name: sessionId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+      requestBody:
+        content:
+          application/json:
+            example:
+              serviceType: PARKING
+  /v2/partner-apis/sessions/cancel:
+    post:
+      summary: Cancel the FUEL session by Vin( DEV environment only )
+      operationId: cancelTheFuelSessionByVin
+      tags:
+      - Session
+      responses:
+        '201':
+          description: Response
+      description: 'NOTE: This api is applicable for DEV environment and FUEL sessions only.
+
+        API is to help developer to cancel the session during integration for the given vin and serviceType(FUEL).
+
+        '
+      parameters:
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+      requestBody:
+        content:
+          application/json:
+            example: {}
+  /v2/partner-apis/sessions/{sessionId}/cancel:
+    post:
+      summary: Cancel the FUEL session by sessionId ( DEV environment only )
+      operationId: cancelTheFuelSessionBySessionid
+      tags:
+      - Session
+      responses:
+        '201':
+          description: Response
+      description: 'NOTE: This api is applicable for DEV environment and FUEL sessions only.
+
+        API is to help developer to cancel the session during integration for the given sessionId. Use
+        "Get Currently Active Sessions" API to retrieve action sessionId.
+
+        '
+      parameters:
+      - name: sessionId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+      requestBody:
+        content:
+          application/json:
+            example: {}
+  /v2/partner-apis/serviceHubs:
+    get:
+      summary: Get Service Hubs
+      operationId: getServiceHubs
+      tags:
+      - Service Hubs (Points Of Interest)
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              example:
+              - id: fst_380a228fd332746cadc3
+                type: FUEL
+                displayName: TEANECK TWSP
+                currency: USD
+                location: 40.885482,-74.007431
+                logoUrl: https://dev-in-sheeva-tandc.s3.ap-south-1.amazonaws.com/iocl_logo.png
+                addressDetails:
+                  streetAddress: Blythe Road, Chamberlayne
+                  city: Richmond
+                  state: Virginia
+                  zipCode: '23116'
+                  country: US
+                fuelPrices:
+                - fuelType: Gas Regular
+                  price: 3.5
+                  unit: gallon
+                - fuelType: Gas Premium
+                  price: 4.5
+                  unit: gallon
+                - fuelType: Diesel
+                  price: 3.5
+                  unit: gallon
+                promotions:
+                - name: Reward Days
+                  category: FUEL
+                  discount: Get 10 cents off per gallon
+                  mediaURL: https://example.com/abc.jpg
+                amenities:
+                - Washrooms
+                - Free Air
+                - Convenience Store
+                operatingHours:
+                - 06:00-23:30
+                openingHours:
+                - day: '1'
+                  hours:
+                  - 5:00 - 22:00
+                - day: '2'
+                  hours:
+                  - 5:00 - 22:00
+                - day: '3'
+                  hours:
+                  - 5:00 - 22:00
+                - day: '4'
+                  hours:
+                  - 5:00 - 22:00
+                - day: '5'
+                  hours:
+                  - 5:00 - 22:00
+                - day: '6'
+                  hours:
+                  - 6:00 - 22:00
+                - day: '7'
+                  hours:
+                  - 8:00 - 22:00
+                paymentEnabled: true
+                distance: 8.710607771265286
+                address: Blythe Road, Chamberlayne
+                city: Richmond
+                stateCode: VA
+      description: 'This request returns POIs based on geolocation and service type.
+
+        If successful, returns: HTTP 201 CREATED.
+
+        '
+      parameters:
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+    post:
+      summary: Get Service Hubs (Deprecated)
+      operationId: getServiceHubs2
+      tags:
+      - Service Hubs (Points Of Interest)
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              example:
+              - poiId: cst_3f798db4b2fef377ab1b
+                type: CHARGING
+                displayName: PARKRDIGE IV
+                currency: USD
+                location: 38.943907,-77.312812
+                address: 10700 Parkridge Blvd, Reston, va, us
+                active: true
+                chargers:
+                - latitude: 38.943905
+                  longitude: -77.312798
+                  unified_connector_id: db5d95aa-f69a-443a-b8cd-3aac6627360f
+                  station_id: 84cc78fd-2c53-48a3-9c21-3aeeb08e0f97
+                  connector_name: PARKRDIGE IV, STATION 1
+                  base_rate: 0.19
+                  connector_type: J-1772
+                  network: Charge_Point
+                  speed: 6.6
+                  availability: available
+                  street_address: 10700 Parkridge Blvd
+                  city: Reston
+                  state: Virginia
+                - latitude: 38.943905
+                  longitude: -77.312798
+                  unified_connector_id: 90f29fbe-18fd-4c95-bb14-05a990af579f
+                  station_id: 84cc78fd-2c53-48a3-9c21-3aeeb08e0f97
+                  connector_name: PARKRDIGE IV, STATION 1
+                  base_rate: 0.19
+                  connector_type: J-1772
+                  network: Charge_Point
+                  speed: 6.6
+                  availability: available
+                  street_address: 10700 Parkridge Blvd
+                  city: Reston
+                  state: Virginia
+              - poiId: cst_6f216de55c646e5231d9
+                type: CHARGING
+                displayName: WOLF TRAP
+                currency: USD
+                location: 38.933441,-77.265007
+                address: 1645 Trap Rd, Vienna, va, us
+                active: true
+                chargers:
+                - latitude: 38.933426
+                  longitude: -77.264969
+                  unified_connector_id: 8ad1da7f-fa0e-4152-aec2-f3c48c0c7f0b
+                  station_id: 81d0f7e9-f1a0-45e5-b959-1d3dfd3366e9
+                  connector_name: WOLF TRAP, BARNS@WOLF TRAP
+                  base_rate: 0.0
+                  connector_type: J-1772
+                  network: Charge_Point
+                  speed: 6.6
+                  availability: available
+                  street_address: 1645 Trap Rd
+                  city: Vienna
+                  state: Virginia
+                - latitude: 38.933426
+                  longitude: -77.264969
+                  unified_connector_id: fcaea0c9-3841-40bb-94f4-1ae96e724e93
+                  station_id: 81d0f7e9-f1a0-45e5-b959-1d3dfd3366e9
+                  connector_name: WOLF TRAP, BARNS@WOLF TRAP
+                  base_rate: 0.0
+                  connector_type: J-1772
+                  network: Charge_Point
+                  speed: 6.6
+                  availability: in_use
+                  street_address: 1645 Trap Rd
+                  city: Vienna
+                  state: Virginia
+      description: 'This request returns POIs based on geolocation and service type.
+
+        If successful, returns: HTTP 201 CREATED.
+
+        '
+      parameters:
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+      requestBody:
+        content:
+          application/json:
+            example:
+              latitude: 38.9262643
+              longitude: -77.2428208
+              searchValue: 5
+              distance: MILES
+              type: FUEL
+  /v2/partner-apis/serviceHubs/{serviceHubId}:
+    get:
+      summary: Get Service Hub Details
+      operationId: getServiceHubDetails
+      tags:
+      - Service Hubs (Points Of Interest)
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              example:
+                displayName: Marina Lot 9
+                currency: USD
+                location: 33.982403360821465,-118.4560913004027
+                addressDetails:
+                  city: N/A
+                  state: N/A
+                  zipCode: N/A
+                  country: N/A
+                  streetAddress: N/A
+                amenities:
+                - Convenience Store
+                - Free Air
+                - Washrooms
+                promotions:
+                - name: Reward Days
+                  category: PARKING
+                  discount: N/A
+                  mediaURL: https://example.com/abc.jpg
+                polygon: 33.982144 -118.455279;33.982945 -118.456666;33.982662 -118.456904;33.981964 -118.455694;33.982008
+                  -118.455657;33.981974 -118.455600;33.981971 -118.455538;33.981993 -118.455475;33.982082
+                  -118.455331;33.982144 -118.455279
+                timezone: America/Los_Angeles
+                openingHours:
+                - day: '1'
+                  hours:
+                  - 5:00 - 22:00
+                - day: '2'
+                  hours:
+                  - 5:00 - 22:00
+                - day: '3'
+                  hours:
+                  - 5:00 - 22:00
+                - day: '4'
+                  hours:
+                  - 5:00 - 22:00
+                - day: '5'
+                  hours:
+                  - 5:00 - 22:00
+                - day: '6'
+                  hours:
+                  - 6:00 - 22:00
+                - day: '7'
+                  hours:
+                  - 8:00 - 22:00
+                id: '1100053'
+      parameters:
+      - name: serviceHubId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+  /v2/partner-apis/parking/quote:
+    get:
+      summary: Get Quote
+      operationId: getQuote
+      tags:
+      - Parking
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              example:
+                serviceHubId: '1100053'
+                sessionId: parking_UbnAGCt2fQItXcZHsrE8
+                quoteId: d7156f56-3c6c-458a-8203-ee1d6c026f68
+                startTime: '2024-06-19 13:12:00'
+                endTime: '2024-06-19 14:12:00'
+                price: 2
+                currency: USD
+                createdAt: 1719950406962
+                expiresIn: 15
+      description: 'Sending demoMode=1 would run a transaction with fake payment and will not activate
+        the pump, charger or the parking lot. This helps with simulated testing in the sandbox / development.
+
+        '
+      parameters:
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+  /v2/partner-apis/parking/reserve:
+    post:
+      summary: Reserve Parking
+      operationId: reserveParking
+      tags:
+      - Parking
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              example:
+                orderId: 3de93d80-5b67-4cbf-a1f9-2482171b4f08
+                confirmationCode: '10001'
+      description: 'Sending demoMode=1 would run a transaction with fake payment and will not activate
+        the pump, charger or the parking lot. This helps with simulated testing in the sandbox / development.
+
+        '
+      parameters:
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+      requestBody:
+        content:
+          application/json:
+            example:
+              vin: '{{vin}}'
+              sessionId: '{{parkingSessionId}}'
+              quoteId: '{{quoteId}}'
+  /v2/partner-apis/payments/upi/payment-complete:
+    post:
+      summary: UPI Payment Complete
+      operationId: upiPaymentComplete
+      tags:
+      - UPI
+      responses:
+        '200':
+          description: OK
+      parameters:
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+  /v2/partner-apis/payments/upi/initiate:
+    post:
+      summary: Pay For Order
+      operationId: payForOrder
+      tags:
+      - UPI
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              example:
+                success: false
+                reason: Payment intent url is not available
+      description: 'Sending demoMode=1 would run a transaction with fake payment and will not activate
+        the pump, charger or the parking lot. This helps with simulated testing in the sandbox / development.
+
+        '
+      parameters:
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+      requestBody:
+        content:
+          application/json:
+            example:
+              purchaseAmount: 50
+              serviceType: PARKING
+              vin: ''
+              driverId: ''
+              quoteId: quote_12121212
+              paymentInstruments:
+              - amount: 50
+                type: upi
+  /v2/partner-apis/transactions:
+    get:
+      summary: Get Payment Transactions
+      operationId: getPaymentTransactions
+      tags:
+      - Transactions
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              example:
+                transactions:
+                - paymentId: pay_2y2aDe6BEqbLCYJlgLcd
+                  transactionId: 10261296-166853171260
+                  sessionId: fuel_BOuBK76KoPMICbp14Ute
+                  serviceHub:
+                    name: ICar Port
+                    streetAddress: 10B, Ram Nagar, Chennai
+                  vehicle:
+                    licensePlate: MH 01 AB 1234
+                    model: Compass
+                    make: Jeep
+                    year: 2023
+                    color: RED
+                  status: SERVICE_COMPLETE
+                  paymentStatus: PAYMENT_COMPLETE
+                  serviceType: FUEL
+                  currency: INR
+                  amount: 100.0
+                  paymentType: upi
+                  createdAt: 1668531651000
+                metadata:
+                  result_set:
+                    count: 25
+                    offset: 0
+                    limit: 25
+                    total: 77
+      description: 'This request returns payment transactions done by the driver or by the vin/vehicle.
+        This API supports pagination.
+
+        Response Body Field Descriptions :
+
+
+
+
+        Field
+
+        Description
+
+
+
+
+
+        paymentId
+
+        Sheeva.AI unique paymentId
+
+
+
+        transactionId
+
+        Order number for this transaction
+
+
+
+        driverId
+
+        Sheeva.AI unique driverId
+
+
+
+        vin
+
+        Unique vehicle identifier
+
+
+
+        sessionId
+
+        Service type session identifier
+
+
+
+        poiName
+
+        Point of Interest (POI) name - station name for fuel service
+
+
+
+        licensePlate
+
+        Vehicle registration number
+
+
+
+        status
+
+        Session status code (Refer definitions of Session Status Codes above)
+
+
+
+        paymentStatus
+
+        Payment status (Refer definitions of Payment Status Codes above)
+
+
+
+        serviceType
+
+        Service availed with this transaction
+
+
+
+        currency
+
+        Currency code
+
+
+
+        model
+
+        Vehicle model
+
+
+
+        amount
+
+        Transaction amount
+
+
+
+        rewardAmount
+
+        Reward amo'
+      parameters:
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+  /v2/partner-apis/transactions/details:
+    get:
+      summary: Get Payment Transactions Details
+      operationId: getPaymentTransactionsDetails
+      tags:
+      - Transactions
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              example:
+                driver:
+                  driverId: dri_dafa233
+                  firstName: Lokesh
+                  lastName: Kumar
+                transaction:
+                  vehicle:
+                    vin: HUT242424242
+                    licensePlate: MH 01 AB 1234
+                    model: Compass
+                    make: Jeep
+                    year: 2023
+                    color: RED
+                    fuelTypes:
+                    - diesel
+                    connectorType: J1772
+                    active: true
+                  serviceHub:
+                    id: fst_dbe5bcc470b1cb3e5375
+                    name: ICar Port
+                    pump: '3'
+                    location: 19.102809,72.873848
+                    logoUrl: https://dev-in-sheeva-tandc.s3.ap-south-1.amazonaws.com/iocl_logo.png
+                    addressDetails:
+                      streetAddress: Aarey Colony, Goregaon
+                      city: Mumbai
+                      state: Maharashtra
+                      zipCode: '400065'
+                      country: India
+                  paymentId: pay_2y2aDe6BEqbLCYJlgLcd
+                  transactionId: 10261296-166853171260
+                  sessionId: fuel_BOuBK76KoPMICbp14Ute
+                  status: SERVICE_COMPLETE
+                  paymentStatus: PAYMENT_COMPLETE
+                  serviceType: FUEL
+                  currency: INR
+                  amount: 100.0
+                  paymentInstruments:
+                  - type: upi
+                    amount: 50.0
+                    transactionId: AXI59bc02049a9447c0bf53e8367175ac42
+                  - type: rewards
+                    name: Sheeva Rewards
+                    organization: Sheeva
+                    serviceProviderCode: Sheeva
+                    serviceProviderName: Sheeva
+                    amount: 20.0
+                    transactionId: rewards-sheeva-1213141
+                  - type: rewards
+                    name: IOCL XtraRewards
+                    organization: IOCL
+                    serviceProviderCode: IOCL
+                    serviceProviderName: Indian Oil Corporation
+                    amount: 30.0
+                    transactionId: rewards-iocl-xtra-12412412
+                  rewardsEarned:
+                  - type: rewards
+                    name: Sheeva Rewards
+                    organization: Sheeva
+                    serviceProviderCode: Sheeva
+                    serviceProviderName: Sheeva
+                    points: 100
+                    amount: 10
+                    transactionId: rewards-sheeva-1213142
+                  createdAt: 1668531651000
+      description: 'This request returns the details of a single payment transaction.
+
+        If successful, returns: HTTP 200 OK.
+
+        Response Body Field Description:
+
+
+
+
+        Field
+
+        Description
+
+
+
+
+
+        paymentId
+
+        Sheeva.AI unique paymentId
+
+
+
+        transactionId
+
+        Order number for this transaction
+
+
+
+        driverId
+
+        Sheeva.AI unique driverId
+
+
+
+        vehicleId
+
+        Unique vehicle identifier
+
+
+
+        sessionId
+
+        Service type session identifier
+
+
+
+        poiName
+
+        Point of Interest (POI) name - station name for fuel service
+
+
+
+        licensePlate
+
+        Vehicle registration number
+
+
+
+        status
+
+        Transaction status:  COMPLETED Transaction was completed successfully  FAILED Transaction failed  DISCARDED
+        Transaction was not attempted within the time limit, hence discarded.
+
+
+
+        serviceType
+
+        Service availed with this transaction: [FUEL, CHARGING, PARKING, TOLL, etc.]
+
+
+
+        currency
+
+        Currency code: [E.g.: USD, INR'
+      parameters:
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+  /v2/partner-apis/transactions/receipt:
+    get:
+      summary: Get Payment Receipt
+      operationId: getPaymentReceipt
+      tags:
+      - Transactions
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              example:
+                receiptStatus: NOT_AVAILABLE
+      description: 'This request triggers sending the PDF receipt URL to a messaging channel, currently
+        WhatsApp.
+
+        If successful, returns: HTTP 200 OK.
+
+        '
+      parameters:
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+  /v2/partner-apis/wallet:
+    get:
+      summary: 1 - Get Vehicle Wallet
+      operationId: getVehicleWallet
+      tags:
+      - Credit Cards
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              example:
+                walletId: 1bf4de4f-442f-42d6-abc6-86a952ef7895
+                driverId: dri_bP2lHCcPFzY6Yd19qvdM
+                vin: sheeva_vehicle_id_test
+                type: VEHICLE
+                cards:
+                - id: 4e17a735-9810-4236-8544-790886d53f5f
+                  lastFour: '0564'
+                  status: ACTIVE
+                  brand: VISA
+                  default: true
+      parameters:
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+  /v2/partner-apis/wallet/public-key:
+    post:
+      summary: 2 - Generate Public Key To Add Credit Card
+      operationId: generatePublicKeyToAddCreditCard
+      tags:
+      - Credit Cards
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              example:
+                key: MIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEAtVDy2c5oQxndUliND2sQCg0DOBnCdpdHS37UcR1SZYAmkPFNkz//N6+49OFgab+AtOC84aTICo3y6FnDXP0qF2fte1aIesDX2gDUDsfHoVMo7JRNzkRGIe4+t6hxa6Atjclpyb+sLo1tM0p5n1dStE2F44AgiDCbbdIsBfdDta2d4fhgUR8KfT7ZHrqH/ZOzp4BW53sde+FtmnstviVcSxShQNpI1KurfRKT+tgps6JNw/lJE58EnpqTHRIRraMTpWJThSsaiyWdlIhKjO0iq0bo5Gj/he4pHqM4W58mtT3dwhq3t21n28I2/H//2Xcyt2H/LLGeAzdcuAuoJlvKVCtNxO9aJ0lRu/TNvi75moMWXs3Eysbib3PtOCUVeJnj/fABEW4fkAX7c0ceM+dwkQpq8ccsDieywrpaZDgQ8g5toHyJb6Ye7rtsSnGnju6u+Dr1D1Xp7tM1Jilksj/p5s1bmEJMvQ4yxJgXnORhr6nB0rMib8UBT7mMwbyG2VdZAgMBAAE=
+      parameters:
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+      requestBody:
+        content:
+          application/json:
+            example:
+              walletId: '{{walletId}}'
+              driverId: '{{driverId}}'
+              vin: '{{vin}}'
+  /v2/partner-apis/wallet/cards:
+    post:
+      summary: 3 - Add Credit Card To A Wallet
+      operationId: addCreditCardToAWallet
+      tags:
+      - Credit Cards
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              example:
+                state: Success
+                message: Credit card added successfully
+      parameters:
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+      requestBody:
+        content:
+          application/json:
+            example:
+              driverId: '{{driverId}}'
+              vin: '{{vin}}'
+              walletId: '{{walletId}}'
+              encryptedCreditCard: HrWagujXc4FctJdPBWiLGQjFjfGFwNfR8OpJRzzt9ROxfg6t5NeRPUJ/RwKiUFZdMR5+mKraKOS+u6wHofFeWJ6A0PO4LJZFOgL7Y+5EHIW1wrBrORsjl8hKnEcedx2Cd7aHopVacXgTaMpyEcjY8fZUbdbx3wGaNQfRdlgRwt0Ey58ko8S/HmPR1FYd7C7X0Or2yghg+5lIAz4dply9At9cGDy5LqAhbayUHpZUfTwGY9G+sDiS81KrKG87blSX37jchwSxDFCqz4gqy7avvQqEGLYNuJfXhFu6AvakUGNaQpbQ3wr07ZqYB9UBJFBRv0vrM/G5KMbyMcFPv5SJm6Fgt3MZ+T3VNzwh/+O+1+i+AZrhVTToTqlEEv06d/4vi52/A8DXt0KEeRWVgb8TN67a23zgHvYdW8/jZuPcp+gaPYUatUQMoyJHxn/cuzLFsF9f+Q3eYAL8IjGLC0RpglASHKyspmRUrCFXztx9kpiLb2hoSallC9UqD/U+LL0t
+  /v2/partner-apis/wallet/{walletId}/cards:
+    get:
+      summary: 4 - Get Credit Cards Associated To Wallet
+      operationId: getCreditCardsAssociatedToWallet
+      tags:
+      - Credit Cards
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              example:
+              - id: 4e17a735-9810-4236-8544-790886d53f5f
+                lastFour: '0564'
+                brand: VISA
+                default: true
+                expired: false
+              - id: 90a23da-9810-4236-8544-790886d53f5f
+                lastFour: '0564'
+                brand: VISA
+                default: false
+                expired: false
+      parameters:
+      - name: walletId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+  /v2/partner-apis/wallet/{walletId}/cards/{cardId}:
+    get:
+      summary: 5 - Get Credit Card By Id
+      operationId: getCreditCardById
+      tags:
+      - Credit Cards
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              example:
+                id: 4e17a735-9810-4236-8544-790886d53f5f
+                lastFour: '0564'
+                brand: VISA
+                default: true
+                expired: false
+      parameters:
+      - name: cardId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: walletId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+    patch:
+      summary: 6 - Mark Credit Card As Default
+      operationId: markCreditCardAsDefault
+      tags:
+      - Credit Cards
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              example:
+                state: Success
+                message: Card set as default
+      parameters:
+      - name: cardId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: walletId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+    delete:
+      summary: 7 - Delete Credit Card
+      operationId: deleteCreditCard
+      tags:
+      - Credit Cards
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              example:
+                state: Success
+                message: Credit card has been deleted successfully
+      parameters:
+      - name: cardId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: walletId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+  /v2/partner-apis/payments/supported-payment-methods:
+    get:
+      summary: Get Supported Payment Methods
+      operationId: getSupportedPaymentMethods
+      tags:
+      - Payments
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              example:
+              - CREDITCARD
+              - UPI
+              - BNPL
+              - WALLET
+              - LOYALTYPOINTS
+      parameters:
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+  /v2/partner-apis/payments/authorize-transaction:
+    post:
+      summary: Authorize Payment
+      operationId: authorizePayment
+      tags:
+      - Payments
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              example:
+                success: false
+                reason: Credit card declined
+      description: 'Sending demoMode=1 would run a transaction with fake payment and will not activate
+        the pump, charger or the parking lot. This helps with simulated testing in the sandbox / development.
+
+        '
+      parameters:
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+      requestBody:
+        content:
+          application/json:
+            example:
+              purchaseAmount: 150
+              paymentInstruments:
+              - type: creditCard
+                id: card_41414141
+                amount: 100
+              - amount: 50
+                type: rewards
+                loyaltyProgramId: loyalty_123456
+                organizationId: Sheeva-1
+                serviceProviderCode: Sheeva-1
+              demoMode: 0
+  /v2/partner-apis/payments/upi/payment-status:
+    get:
+      summary: Payment Status
+      operationId: paymentStatus
+      tags:
+      - Payments
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              example:
+                paymentStatus: PAYMENT_COMPLETE
+                paymentAckCode: Pay-12345678
+                paymentAckType: QR_CODE
+                paymentAckPlatform: IOCL PAY
+                paymentConfirmationStatus: READY
+                serviceStatus: SERVICE_CONFIRMED
+      parameters:
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+  /v2/partner-apis/webhooks/status-updates:
+    post:
+      summary: Register Status Webhook
+      operationId: registerStatusWebhook
+      tags:
+      - Webhooks
+      responses:
+        '201':
+          description: Created
+      description: 'This request allows registering an HTTP POST status webhook with SeevaConnect.
+
+        If successful, returns: HTTP 201 CREATED.
+
+        Examples below demonstrate the json body Sheeva will call your registered webhook endpoint with:
+
+
+        Service Alert Example
+
+        Status Callback Example
+
+
+        Status:
+
+
+
+
+        Status
+
+        serviceType
+
+
+
+
+
+        LOW_FUEL_DETECTED
+
+        FUEL
+
+
+
+        LOW_CHARGE_DETECTED
+
+        CHARGING
+
+
+
+        AT_SERVICE_HUB
+
+        FUEL, CHARGING, PARKING
+
+
+
+        AT_SERVICE_POINT
+
+        FUEL, CHARGING, PARKING
+
+
+
+        SERVICE_POINT_CONFIRMED
+
+        FUEL, CHARGING, PARKING
+
+
+
+        SERVICE_IN_PROGRESS
+
+        PARKING
+
+
+
+        SERVICE_COMPLETE
+
+        FUEL, CHARGING, PARKING
+
+
+
+        SERVICE_CANCELLED_BY_DRIVER
+
+        FUEL, CHARGING, PARKING
+
+
+
+        SERVICE_ABORTED_BY_SYSTEM
+
+        FUEL, CHARGING, PARKING
+
+
+
+        PAYMENT_COMPLETE
+
+        FUEL, CHARGING, PARKING
+
+
+
+        PAYMENT_FAILED
+
+        FUEL, CHARGING, PARKING
+
+
+
+
+        '
+      parameters:
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+      requestBody:
+        content:
+          application/json:
+            example:
+              webhookUrl: https://test.denso.com
+              hmacSigningKey: f7bc83f430538424b13298e6aa6fb143ef4d59a14946175997479dbc2d1a3cd8
+              apikey: af75e1f0-f472-48bb-83b2-35541dc860dd
+  /v2/partner-apis/webhooks:
+    get:
+      summary: Get Registered Web Hooks
+      operationId: getRegisteredWebHooks
+      tags:
+      - Webhooks
+      responses:
+        '200':
+          description: OK
+      parameters:
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+  /v2/partner-apis/webhooks/{webhook-id}:
+    delete:
+      summary: Delete a Web Hook
+      operationId: deleteAWebHook
+      tags:
+      - Webhooks
+      responses:
+        '200':
+          description: OK
+      parameters:
+      - name: webhook-id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+  /v2/partner-apis/loyalty-programs:
+    get:
+      summary: Get My Programs
+      operationId: getMyPrograms
+      tags:
+      - Loyalty
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              example:
+              - loyaltyMembershipId: LY100123418489768
+                availablePoints: 1.0
+                id: iocl_xtrarewards
+                name: IOCL Xtrarewards
+                organization: Indian Oil Corporation Ltd
+                serviceProviderCode: IOCL
+                serviceProviderName: Indian Oil Corporation Ltd
+                scheme: PointBasedRewards
+                balance:
+                  points: 800
+                  amount: 50
+                  currency: INR
+                redemptionRules:
+                  minPoints: 50.0
+                  network: IOCL
+                conversionRule:
+                  redeem: 50.0
+                  exchangeRatio: 0.3
+                  redeemCurrency: POINTS
+                  exchangeCurrency: INR
+                  displayText: Redeem 50 Points for Rs. 15
+                earningRule:
+                  spend: 75.0
+                  earn: 1.0
+                  spendCurrency: INR
+                  earnCurrency: POINTS
+                  displayText: For every Rs. 75 spent, earn 1 Point(s)
+      parameters:
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+    post:
+      summary: Sign up for a program
+      operationId: signUpForAProgram
+      tags:
+      - Loyalty
+      responses:
+        '200':
+          description: OK
+      parameters:
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+      requestBody:
+        content:
+          application/json:
+            example:
+              driverId: '{{driverId}}'
+              loyaltyProgramId: '{{loyaltyProgramId}}'
+  /v2/partner-apis/loyalty-programs/convert-my-points:
+    post:
+      summary: Calculate Rewards (Amount)
+      operationId: calculateRewards
+      tags:
+      - Loyalty
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              example:
+                id: iocl-xtrarewards
+                rewardPoints: 123.43
+                amount: 35.4
+                currency: INR
+      parameters:
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+      requestBody:
+        content:
+          application/json:
+            example:
+              id: iocl_xtrarewards
+              rewardPoints: 123.43
+  /v2/partner-apis/feedback/reasons:
+    get:
+      summary: Get Cancellation Reasons
+      operationId: getCancellationReasons
+      tags:
+      - Feedback
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              example:
+                cancellationReasons:
+                - code: CHANGE_OF_PLANS
+                  description: 'Change of Plans: Plans changed, service no longer neede'
+                - code: FOUND_BETTER_OPTION
+                  description: 'Found Better Option: Found a more suitable alternative'
+                - code: DISSATISFIED_WITH_SERVICE
+                  description: 'Dissatisfied Service: Service quality not up to expectations'
+                - code: OTHER_REASONS
+                  description: 'Other Reasons: Reasons that are not listed'
+      description: 'This request allows registering an HTTP POST status webhook with SeevaConnect.
+
+        If successful, returns: HTTP 201 CREATED.
+
+        Examples below demonstrate the json body Sheeva will call your registered webhook endpoint with:
+
+
+        Service Alert Example
+
+        Status Callback Example
+
+
+        '
+      parameters:
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+  /v2/partner-apis/feedback:
+    post:
+      summary: Submit Feedback
+      operationId: submitFeedback
+      tags:
+      - Feedback
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                code: ''
+                message: ''
+      parameters:
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+      requestBody:
+        content:
+          application/json:
+            example:
+              serviceType: UBI_PAYMENTS
+              driver_id: ''
+              reasonCode: OTHER_REASONS
+              reasonText: ''
+  /v2/partner-apis/feedback/:
+    get:
+      summary: Get Feedback
+      operationId: getFeedback
+      tags:
+      - Feedback
+      responses:
+        '200':
+          description: Response
+          content:
+            application/json:
+              example:
+                feedback:
+                - reasonCode: OTHER_REASONS
+                  reasonText: Feedback Text As Received/Entered By The User
+                  receivedAt: '2024-03-21 14:04:45'
+      parameters:
+      - name: x-sheeva-program-code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Provided by Sheeva
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Access token obtained from GET /v2/auth (exchange client-id/client-secret), sent in
+        the Authorization header.
+    clientCredentials:
+      type: apiKey
+      in: header
+      name: client-id
+      description: client-id + client-secret headers on GET /v2/auth to obtain an access token.
+security:
+- bearerAuth: []

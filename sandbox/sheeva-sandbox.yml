@@ -1,0 +1,36 @@
+generated: '2026-07-21'
+method: searched
+source: https://api-spec.sheeva.ai/ (SheevaConnect API Specification 2.0 — environment + demo notes)
+summary: >-
+  SheevaConnect exposes region-specific sandbox hosts and a demoMode flag for exercising
+  session and payment flows without live settlement. Test values below are published verbatim
+  in the API specification; none are invented.
+environments:
+  - name: Sandbox (USA)
+    host: https://dev-us-apis.sheeva.ai
+    vehicle_events_host: https://dev-us-vehicle-events-api.sheeva.ai
+  - name: Sandbox (India)
+    host: https://dev-in-apis.sheeva.ai
+    vehicle_events_host: https://dev-in-vehicle-events-api.sheeva.ai
+  - name: Production (USA)
+    host: https://us-apis.sheeva.ai
+  - name: Production (India)
+    host: https://in-apis.sheeva.ai
+demo_mode:
+  param: demoMode
+  values: [0, 1]
+  note: Accepted on payment authorization, confirm-service-point, and payment endpoints to run flows in test mode.
+dev_only_endpoints:
+  - POST /v2/partner-apis/sessions/cancel  # Cancel FUEL session by VIN — DEV environment only
+  - POST /v2/partner-apis/sessions/{sessionId}/cancel  # Cancel FUEL session by sessionId — DEV environment only
+published_example_values:
+  vin:
+    - WBA33AG07PCM25883
+    - TSTLRGBL663PR2127   # example vehicle-events VIN
+  driverId: dri_partner_B8vR4R4vFsDoX3sg3W7z
+  card_id: card_41414141
+  loyalty_program_id: loyalty_123456
+mock_server:
+  note: >-
+    The specification documents setting up a Postman Mock Server (Team Workspace > Mock Servers)
+    against these endpoints for integration testing.

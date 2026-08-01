@@ -1,0 +1,42 @@
+{
+  "provider": "sheeva",
+  "sources": [
+    "sheeva-authentication-api-openapi.yml",
+    "sheeva-credit-cards-api-openapi.yml",
+    "sheeva-driver-alerts-api-openapi.yml",
+    "sheeva-driver-api-openapi.yml",
+    "sheeva-feedback-api-openapi.yml",
+    "sheeva-loyalty-api-openapi.yml",
+    "sheeva-parking-api-openapi.yml",
+    "sheeva-payments-api-openapi.yml",
+    "sheeva-service-hubs-points-of-interest-api-openapi.yml",
+    "sheeva-session-api-openapi.yml",
+    "sheeva-transactions-api-openapi.yml",
+    "sheeva-upi-api-openapi.yml",
+    "sheeva-vehicle-api-openapi.yml",
+    "sheeva-vehicle-events-api-openapi.yml",
+    "sheeva-webhooks-api-openapi.yml"
+  ],
+  "outputs": [
+    "sheeva-authentication-api-openapi.yml",
+    "sheeva-credit-cards-api-openapi.yml",
+    "sheeva-driver-alerts-api-openapi.yml",
+    "sheeva-driver-api-openapi.yml",
+    "sheeva-feedback-api-openapi.yml",
+    "sheeva-loyalty-api-openapi.yml",
+    "sheeva-parking-api-openapi.yml",
+    "sheeva-payments-api-openapi.yml",
+    "sheeva-service-hubs-points-of-interest-api-openapi.yml",
+    "sheeva-session-api-openapi.yml",
+    "sheeva-transactions-api-openapi.yml",
+    "sheeva-upi-api-openapi.yml",
+    "sheeva-vehicle-api-openapi.yml",
+    "sheeva-vehicle-events-api-openapi.yml",
+    "sheeva-webhooks-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
