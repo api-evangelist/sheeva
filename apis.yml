@@ -351,7 +351,7 @@ common:
 - type: YouTube
   url: https://www.youtube.com/channel/UCgTP1ZcjfmfvAf_IxV1ucKQ
 - type: OpenAPI
-  url: openapi/sheeva-openapi.yml
+  url: openapi/_original/sheeva-openapi.yml
 - type: Authentication
   url: authentication/sheeva-authentication.yml
 - type: Webhooks
