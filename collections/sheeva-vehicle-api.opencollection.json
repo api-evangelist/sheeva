@@ -1,0 +1,138 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SheevaConnect Authentication Vehicle API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Vehicle",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Vehicles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us-apis.sheeva.ai/v2/partner-apis/vehicles",
+            "headers": [
+              {
+                "name": "x-sheeva-program-code",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "This request returns vehicles that match the criteria provided in the query parameters. Returns an array of vehicles matching any search criteria. If no matches were found, returns an empty array.\nIf successful, returns: HTTP 200 OK.\n"
+        },
+        {
+          "info": {
+            "name": "Register Vehicle",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us-apis.sheeva.ai/v2/partner-apis/vehicles",
+            "headers": [
+              {
+                "name": "x-sheeva-program-code",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This request allows you to register a vehicle.\nIf the vehicle was not previously added and successfully added, the endpoint returns: HTTP 201 CREATED.\nIf the vehicle is already registered (i.e., same VIN and license plate), the endpoint returns: HTTP 409 CONFLICT along with the existing vehicle in the response. The existing vehicle's id is also present in the Location header.\n"
+        },
+        {
+          "info": {
+            "name": "Get a Vehicle",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us-apis.sheeva.ai/v2/partner-apis/vehicles/:vin",
+            "headers": [
+              {
+                "name": "x-sheeva-program-code",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "vin",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This request allows you fetch a vehicle based on the vehicle identifier.\nIf successful, returns HTTP 200 OK.\nIf vehicle identifier is not found, returns HTTP 404 NOT FOUND.\n"
+        },
+        {
+          "info": {
+            "name": "Update Vehicle",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us-apis.sheeva.ai/v2/partner-apis/vehicles/:vin",
+            "headers": [
+              {
+                "name": "x-sheeva-program-code",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "vin",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This request allows you to update details of a vehicle.\nIf successful, returns HTTP 200 OK.\n"
+        },
+        {
+          "info": {
+            "name": "Get Drivers by VIN",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us-apis.sheeva.ai/v2/partner-apis/vehicles/:vin/drivers",
+            "headers": [
+              {
+                "name": "x-sheeva-program-code",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "vin",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Drivers by VIN"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

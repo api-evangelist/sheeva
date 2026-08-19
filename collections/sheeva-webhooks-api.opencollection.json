@@ -1,0 +1,86 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SheevaConnect Authentication Webhooks API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Webhooks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Register Status Webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us-apis.sheeva.ai/v2/partner-apis/webhooks/status-updates",
+            "headers": [
+              {
+                "name": "x-sheeva-program-code",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This request allows registering an HTTP POST status webhook with SeevaConnect.\nIf successful, returns: HTTP 201 CREATED.\nExamples below demonstrate the json body Sheeva will call your registered webhook endpoint with:\n\nService Alert Example\nStatus Callback Example\n\nStatus:\n\n\n\nStatus\nserviceType\n\n\n\n\nLOW_FUEL_DETECTED\nFUEL\n\n\nLOW_CHARGE_DETECTED\nCHARGING\n\n\nAT_SERVICE_HUB\nFUEL, CHARGING, PARKING\n\n\nAT_SERVICE_POINT\nFUEL, CHARGING, PARKING\n\n\nSERVICE_POINT_CONFIRMED\nFUEL, CHARGING, PARKING\n\n\nSERVICE_IN"
+        },
+        {
+          "info": {
+            "name": "Get Registered Web Hooks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us-apis.sheeva.ai/v2/partner-apis/webhooks",
+            "headers": [
+              {
+                "name": "x-sheeva-program-code",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Get Registered Web Hooks"
+        },
+        {
+          "info": {
+            "name": "Delete a Web Hook",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us-apis.sheeva.ai/v2/partner-apis/webhooks/:webhook-id",
+            "headers": [
+              {
+                "name": "x-sheeva-program-code",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "webhook-id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a Web Hook"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

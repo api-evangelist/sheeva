@@ -1,0 +1,83 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SheevaConnect Authentication Loyalty API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Loyalty",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get My Programs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us-apis.sheeva.ai/v2/partner-apis/loyalty-programs",
+            "headers": [
+              {
+                "name": "x-sheeva-program-code",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Get My Programs"
+        },
+        {
+          "info": {
+            "name": "Sign up for a program",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us-apis.sheeva.ai/v2/partner-apis/loyalty-programs",
+            "headers": [
+              {
+                "name": "x-sheeva-program-code",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sign up for a program"
+        },
+        {
+          "info": {
+            "name": "Calculate Rewards (Amount)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us-apis.sheeva.ai/v2/partner-apis/loyalty-programs/convert-my-points",
+            "headers": [
+              {
+                "name": "x-sheeva-program-code",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Calculate Rewards (Amount)"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

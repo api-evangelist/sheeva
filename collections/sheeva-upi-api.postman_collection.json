@@ -1,0 +1,247 @@
+{
+  "item": [
+    {
+      "id": "c01ff428-ddfe-4d06-a297-acdc0e37d903",
+      "name": "UPI",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0da5c51e-b27a-4544-aad6-b6dc2a1c460c",
+          "name": "UPI Payment Complete",
+          "request": {
+            "name": "UPI Payment Complete",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "partner-apis",
+                "payments",
+                "upi",
+                "payment-complete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Provided by Sheeva",
+                "key": "x-sheeva-program-code",
+                "value": "<string>"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "aabb52d8-e877-4ec9-be76-5c1fa08eeecb",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "partner-apis",
+                    "payments",
+                    "upi",
+                    "payment-complete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Provided by Sheeva",
+                    "key": "x-sheeva-program-code",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0932b476-bfe5-4ffe-b626-1deb14159579",
+          "name": "Pay For Order",
+          "request": {
+            "name": "Pay For Order",
+            "description": {
+              "content": "Sending demoMode=1 would run a transaction with fake payment and will not activate the pump, charger or the parking lot. This helps with simulated testing in the sandbox / development.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "partner-apis",
+                "payments",
+                "upi",
+                "initiate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Provided by Sheeva",
+                "key": "x-sheeva-program-code",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"purchaseAmount\": 50,\n  \"serviceType\": \"PARKING\",\n  \"vin\": \"\",\n  \"driverId\": \"\",\n  \"quoteId\": \"quote_12121212\",\n  \"paymentInstruments\": [\n    {\n      \"amount\": 50,\n      \"type\": \"upi\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0ab492ce-dd45-41ab-b90b-9270e5e5869e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "partner-apis",
+                    "payments",
+                    "upi",
+                    "initiate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Provided by Sheeva",
+                    "key": "x-sheeva-program-code",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"purchaseAmount\": 50,\n  \"serviceType\": \"PARKING\",\n  \"vin\": \"\",\n  \"driverId\": \"\",\n  \"quoteId\": \"quote_12121212\",\n  \"paymentInstruments\": [\n    {\n      \"amount\": 50,\n      \"type\": \"upi\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"reason\": \"Payment intent url is not available\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://us-apis.sheeva.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "80bea6f1-4a68-4160-b28b-0f1780468c2b",
+    "name": "SheevaConnect Authentication UPI API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This SheevaConnect™ API Specification 2.0 is © 2024 Parkofon Inc. (d/b/a Sheeva.AI) and is proprietary information that may not be duplicated, redistributed, form the basis of derivative works, or publicly performed/displayed without the expressed written permission of Sheeva.AI. If you wish to use the SheevaConnect™ API Specification 2.0 and use the SheevaConnect™ cloud platform, please contact Sheeva.AI for a license.\nSheevaConnect APIs enable connected vehicle payments & last-mile services for various use cases including Fueling, EV Charging, Parking and Retail. This solution allows automated & contactless payment in addition to proactive identification of user needs and last-mile navigation to the nearest Sheeva Pay enabled outlets.\nAll APIs follow HTTP status codes, return HTTP 200 OK when successful and following HTTP errors with a message. The message is self explaining to indicate the error in request. The example error codes include :\n\n\n\nError Code\nMessage\n\n\n\n\n400\nBad Request : Check the parameter values\n\n\n404\nResource not found\n\n\n500\nInternal Server Error\n\n\n\nSheevaConnect creates a session when system detects that vehicle requires a service (FUEL, CHARGING, PARKING). Each session goes through various statuses.\nSession Status Codes\n\n\n\nStatus\nDescription\n\n\n\n\nLOW_FUEL_DETECTED\nIf vehicle was low on fuel and system has sent the notification to driver for low fuel or if vehicle is not low on fuel but driver clicks on fuel icon to pay.\n\n\nLOW_CHARGE_DETECTED\nIf vehicle was low on charge and system has sent the notification to driver for low charged or if vehicle is not low on chrage but driver clicks on charge icon to pay.\n\n\nAT_SERVICE_HUB\nThe driver has reached the fuel station / EV charge station / etc.\n\n\nAT_SERVICE_POINT\nThe driver is at fuel pump / charging bay.\n\n\nSERVICE_POINT_CONFIRMED\nDriver confirms the fuel pump / charging bay.\n\n\nSERVICE_IN_PROGRESS\nWhen driver uses a parking service and vehicle is parked\n\n\nSERVICE_COMPLETE\nWhen user marks the fuel, charging, parking complete\n\n\nSERVICE_CANCELLED_BY_DRIVER\nWhen user cancel the service at the pump/ charging bay\n\n\nSERVICE_ABORTED_BY_SYSTEM\nWhen user does opt for service and move away from fuel pump/ charging bay\n\n\n\nPayment Status Codes\n\n\n\nStatus\nDescription\n\n\n\n\nPAYMENT_AUTHORIZED\nWhen a payment is authorized. Only applicable for Credit Card, Wallet and Rewards.\n\n\nPAYMENT_INITIATED\nWhen a payment is in progress. Only applicable for UPI in India.\n\n\nPAYMENT_COMPLETE\nPayment has been processed for a g\n\nContact Support:\n Name: Sheeva.AI",
+      "type": "text/plain"
+    }
+  }
+}

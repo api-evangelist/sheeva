@@ -1,0 +1,198 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SheevaConnect Authentication Session API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Session",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Currently Active Sessions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us-apis.sheeva.ai/v2/partner-apis/sessions/current-session",
+            "headers": [
+              {
+                "name": "x-sheeva-program-code",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "This request returns current fuel session state and details if there is any session with the specified type actively running in the system.\nIf successful, returns: HTTP 200 OK.\nResponse Body Field Description:\n\n\n\nField\nDescription\n\n\n\n\nvehicleLocation\nCurrent vehicle location  latitude, longitude, timestamp ( in EPOCH )\n\n\nactiveSessions\nArray of active session(s) for the the vehicle - if there is any, otherwise it will come as empty\n\n\nactiveSessions[0].id\nUnique service hub identifier  \n\n\nactiveS"
+        },
+        {
+          "info": {
+            "name": "Get Details of a Session",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us-apis.sheeva.ai/v2/partner-apis/sessions/:sessionId",
+            "headers": [
+              {
+                "name": "x-sheeva-program-code",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "sessionId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Details of a Session"
+        },
+        {
+          "info": {
+            "name": "Collect Rating for Completed Session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us-apis.sheeva.ai/v2/partner-apis/sessions/:sessionId/rating",
+            "headers": [
+              {
+                "name": "x-sheeva-program-code",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "sessionId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This API takes in the star rating for a given session and stores it on session and also against service hub (for example fuel station).\nAPI will return HTTP Status Code 201\n"
+        },
+        {
+          "info": {
+            "name": "Confirm Service Point",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us-apis.sheeva.ai/v2/partner-apis/sessions/:sessionId/confirm-service-point",
+            "headers": [
+              {
+                "name": "x-sheeva-program-code",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "sessionId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "API to confirm the service point associated with service.\n\nFuel Pump in case of serviceType = \"FUEL\"\nCharging connector in case of serviceType = \"CHARGING\"\nParking lot in case of serviceType = \"PARKING\"\n\nSending demoMode=1 would run a transaction with fake payment and will not activate the pump, charger or the parking lot. This helps with simulated testing in the sandbox / development.\n"
+        },
+        {
+          "info": {
+            "name": "Mark Service Complete",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us-apis.sheeva.ai/v2/partner-apis/sessions/:sessionId/mark-service-complete",
+            "headers": [
+              {
+                "name": "x-sheeva-program-code",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "sessionId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "NOTE: This api is applicable for serviceType=\"PARKING\"\n"
+        },
+        {
+          "info": {
+            "name": "Cancel the FUEL session by Vin( DEV environment only )",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us-apis.sheeva.ai/v2/partner-apis/sessions/cancel",
+            "headers": [
+              {
+                "name": "x-sheeva-program-code",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "NOTE: This api is applicable for DEV environment and FUEL sessions only.\nAPI is to help developer to cancel the session during integration for the given vin and serviceType(FUEL).\n"
+        },
+        {
+          "info": {
+            "name": "Cancel the FUEL session by sessionId ( DEV environment only )",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us-apis.sheeva.ai/v2/partner-apis/sessions/:sessionId/cancel",
+            "headers": [
+              {
+                "name": "x-sheeva-program-code",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "sessionId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "NOTE: This api is applicable for DEV environment and FUEL sessions only.\nAPI is to help developer to cancel the session during integration for the given sessionId. Use \"Get Currently Active Sessions\" API to retrieve action sessionId.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

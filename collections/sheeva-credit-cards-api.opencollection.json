@@ -1,0 +1,194 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SheevaConnect Authentication Credit Cards API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Credit Cards",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "1 - Get Vehicle Wallet",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us-apis.sheeva.ai/v2/partner-apis/wallet",
+            "headers": [
+              {
+                "name": "x-sheeva-program-code",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "1 - Get Vehicle Wallet"
+        },
+        {
+          "info": {
+            "name": "2 - Generate Public Key To Add Credit Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us-apis.sheeva.ai/v2/partner-apis/wallet/public-key",
+            "headers": [
+              {
+                "name": "x-sheeva-program-code",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "2 - Generate Public Key To Add Credit Card"
+        },
+        {
+          "info": {
+            "name": "3 - Add Credit Card To A Wallet",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us-apis.sheeva.ai/v2/partner-apis/wallet/cards",
+            "headers": [
+              {
+                "name": "x-sheeva-program-code",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "3 - Add Credit Card To A Wallet"
+        },
+        {
+          "info": {
+            "name": "4 - Get Credit Cards Associated To Wallet",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us-apis.sheeva.ai/v2/partner-apis/wallet/:walletId/cards",
+            "headers": [
+              {
+                "name": "x-sheeva-program-code",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "walletId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "4 - Get Credit Cards Associated To Wallet"
+        },
+        {
+          "info": {
+            "name": "5 - Get Credit Card By Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us-apis.sheeva.ai/v2/partner-apis/wallet/:walletId/cards/:cardId",
+            "headers": [
+              {
+                "name": "x-sheeva-program-code",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cardId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "walletId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "5 - Get Credit Card By Id"
+        },
+        {
+          "info": {
+            "name": "6 - Mark Credit Card As Default",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us-apis.sheeva.ai/v2/partner-apis/wallet/:walletId/cards/:cardId",
+            "headers": [
+              {
+                "name": "x-sheeva-program-code",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cardId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "walletId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "6 - Mark Credit Card As Default"
+        },
+        {
+          "info": {
+            "name": "7 - Delete Credit Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us-apis.sheeva.ai/v2/partner-apis/wallet/:walletId/cards/:cardId",
+            "headers": [
+              {
+                "name": "x-sheeva-program-code",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cardId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "walletId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "7 - Delete Credit Card"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

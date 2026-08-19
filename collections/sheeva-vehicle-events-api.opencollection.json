@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SheevaConnect Authentication Vehicle Events API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Vehicle Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Vehicle Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us-apis.sheeva.ai/vehicle-events",
+            "headers": [
+              {
+                "name": "x-sheeva-program-code",
+                "value": ""
+              },
+              {
+                "name": "clientId",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This request accepts vehicle status for multiple vehicles, which includes current vehicle location, fuel / charge level, speed, parking brake and ignition status.\nIf successful, returns: HTTP 201 CREATED.\nNote: This replaces the older \"Vehicle Events\" endpoint. Use this instead.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SheevaConnect Authentication Parking API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Parking",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Quote",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us-apis.sheeva.ai/v2/partner-apis/parking/quote",
+            "headers": [
+              {
+                "name": "x-sheeva-program-code",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Sending demoMode=1 would run a transaction with fake payment and will not activate the pump, charger or the parking lot. This helps with simulated testing in the sandbox / development.\n"
+        },
+        {
+          "info": {
+            "name": "Reserve Parking",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us-apis.sheeva.ai/v2/partner-apis/parking/reserve",
+            "headers": [
+              {
+                "name": "x-sheeva-program-code",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sending demoMode=1 would run a transaction with fake payment and will not activate the pump, charger or the parking lot. This helps with simulated testing in the sandbox / development.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

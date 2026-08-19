@@ -1,0 +1,45 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SheevaConnect Authentication API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Authentication",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us-apis.sheeva.ai/v2/auth",
+            "headers": [
+              {
+                "name": "client-id",
+                "value": ""
+              },
+              {
+                "name": "client-secret",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "The authentication service endpoint is used to get an access token, which must be sent with each call as a Bearer Token.\nIf successful, returns: HTTP 200 OK.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

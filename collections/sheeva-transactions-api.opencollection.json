@@ -1,0 +1,75 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SheevaConnect Authentication Transactions API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Transactions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Payment Transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us-apis.sheeva.ai/v2/partner-apis/transactions",
+            "headers": [
+              {
+                "name": "x-sheeva-program-code",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "This request returns payment transactions done by the driver or by the vin/vehicle. This API supports pagination.\nResponse Body Field Descriptions :\n\n\n\nField\nDescription\n\n\n\n\npaymentId\nSheeva.AI unique paymentId\n\n\ntransactionId\nOrder number for this transaction\n\n\ndriverId\nSheeva.AI unique driverId\n\n\nvin\nUnique vehicle identifier\n\n\nsessionId\nService type session identifier\n\n\npoiName\nPoint of Interest (POI) name - station name for fuel service\n\n\nlicensePlate\nVehicle registration number\n\n\nstatus\nSes"
+        },
+        {
+          "info": {
+            "name": "Get Payment Transactions Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us-apis.sheeva.ai/v2/partner-apis/transactions/details",
+            "headers": [
+              {
+                "name": "x-sheeva-program-code",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "This request returns the details of a single payment transaction.\nIf successful, returns: HTTP 200 OK.\nResponse Body Field Description:\n\n\n\nField\nDescription\n\n\n\n\npaymentId\nSheeva.AI unique paymentId\n\n\ntransactionId\nOrder number for this transaction\n\n\ndriverId\nSheeva.AI unique driverId\n\n\nvehicleId\nUnique vehicle identifier\n\n\nsessionId\nService type session identifier\n\n\npoiName\nPoint of Interest (POI) name - station name for fuel service\n\n\nlicensePlate\nVehicle registration number\n\n\nstatus\nTransactio"
+        },
+        {
+          "info": {
+            "name": "Get Payment Receipt",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us-apis.sheeva.ai/v2/partner-apis/transactions/receipt",
+            "headers": [
+              {
+                "name": "x-sheeva-program-code",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "This request triggers sending the PDF receipt URL to a messaging channel, currently WhatsApp.\nIf successful, returns: HTTP 200 OK.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

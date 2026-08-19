@@ -1,0 +1,327 @@
+{
+  "item": [
+    {
+      "id": "94e6dfd1-8dd5-4555-8ad8-4c9a24cff969",
+      "name": "Transactions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c3bb4664-87d0-43d7-bc45-9a99f34f27f7",
+          "name": "Get Payment Transactions",
+          "request": {
+            "name": "Get Payment Transactions",
+            "description": {
+              "content": "This request returns payment transactions done by the driver or by the vin/vehicle. This API supports pagination.\nResponse Body Field Descriptions :\n\n\n\nField\nDescription\n\n\n\n\npaymentId\nSheeva.AI unique paymentId\n\n\ntransactionId\nOrder number for this transaction\n\n\ndriverId\nSheeva.AI unique driverId\n\n\nvin\nUnique vehicle identifier\n\n\nsessionId\nService type session identifier\n\n\npoiName\nPoint of Interest (POI) name - station name for fuel service\n\n\nlicensePlate\nVehicle registration number\n\n\nstatus\nSession status code (Refer definitions of Session Status Codes above)\n\n\npaymentStatus\nPayment status (Refer definitions of Payment Status Codes above)\n\n\nserviceType\nService availed with this transaction\n\n\ncurrency\nCurrency code\n\n\nmodel\nVehicle model\n\n\namount\nTransaction amount\n\n\nrewardAmount\nReward amo",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "partner-apis",
+                "transactions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Provided by Sheeva",
+                "key": "x-sheeva-program-code",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d5143de3-fe08-42bb-94df-81c6163e229f",
+              "name": "Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "partner-apis",
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Provided by Sheeva",
+                    "key": "x-sheeva-program-code",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactions\": [\n    {\n      \"paymentId\": \"pay_2y2aDe6BEqbLCYJlgLcd\",\n      \"transactionId\": \"10261296-166853171260\",\n      \"sessionId\": \"fuel_BOuBK76KoPMICbp14Ute\",\n      \"serviceHub\": {\n        \"name\": \"ICar Port\",\n        \"streetAddress\": \"10B, Ram Nagar, Chennai\"\n      },\n      \"vehicle\": {\n        \"licensePlate\": \"MH 01 AB 1234\",\n        \"model\": \"Compass\",\n        \"make\": \"Jeep\",\n        \"year\": 2023,\n        \"color\": \"RED\"\n      },\n      \"status\": \"SERVICE_COMPLETE\",\n      \"paymentStatus\": \"PAYMENT_COMPLETE\",\n      \"serviceType\": \"FUEL\",\n      \"currency\": \"INR\",\n      \"amount\": 100,\n      \"paymentType\": \"upi\",\n      \"createdAt\": 1668531651000\n    }\n  ],\n  \"metadata\": {\n    \"result_set\": {\n      \"count\": 25,\n      \"offset\": 0,\n      \"limit\": 25,\n      \"total\": 77\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "eed979c9-aa37-4075-9320-6285cf02eb64",
+          "name": "Get Payment Transactions Details",
+          "request": {
+            "name": "Get Payment Transactions Details",
+            "description": {
+              "content": "This request returns the details of a single payment transaction.\nIf successful, returns: HTTP 200 OK.\nResponse Body Field Description:\n\n\n\nField\nDescription\n\n\n\n\npaymentId\nSheeva.AI unique paymentId\n\n\ntransactionId\nOrder number for this transaction\n\n\ndriverId\nSheeva.AI unique driverId\n\n\nvehicleId\nUnique vehicle identifier\n\n\nsessionId\nService type session identifier\n\n\npoiName\nPoint of Interest (POI) name - station name for fuel service\n\n\nlicensePlate\nVehicle registration number\n\n\nstatus\nTransaction status:  COMPLETED Transaction was completed successfully  FAILED Transaction failed  DISCARDED Transaction was not attempted within the time limit, hence discarded.\n\n\nserviceType\nService availed with this transaction: [FUEL, CHARGING, PARKING, TOLL, etc.]\n\n\ncurrency\nCurrency code: [E.g.: USD, INR",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "partner-apis",
+                "transactions",
+                "details"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Provided by Sheeva",
+                "key": "x-sheeva-program-code",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "27913a18-9b73-43c5-bca1-0973dfdf21e5",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "partner-apis",
+                    "transactions",
+                    "details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Provided by Sheeva",
+                    "key": "x-sheeva-program-code",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"driver\": {\n    \"driverId\": \"dri_dafa233\",\n    \"firstName\": \"Lokesh\",\n    \"lastName\": \"Kumar\"\n  },\n  \"transaction\": {\n    \"vehicle\": {\n      \"vin\": \"HUT242424242\",\n      \"licensePlate\": \"MH 01 AB 1234\",\n      \"model\": \"Compass\",\n      \"make\": \"Jeep\",\n      \"year\": 2023,\n      \"color\": \"RED\",\n      \"fuelTypes\": [\n        \"diesel\"\n      ],\n      \"connectorType\": \"J1772\",\n      \"active\": true\n    },\n    \"serviceHub\": {\n      \"id\": \"fst_dbe5bcc470b1cb3e5375\",\n      \"name\": \"ICar Port\",\n      \"pump\": \"3\",\n      \"location\": \"19.102809,72.873848\",\n      \"logoUrl\": \"https://dev-in-sheeva-tandc.s3.ap-south-1.amazonaws.com/iocl_logo.png\",\n      \"addressDetails\": {\n        \"streetAddress\": \"Aarey Colony, Goregaon\",\n        \"city\": \"Mumbai\",\n        \"state\": \"Maharashtra\",\n        \"zipCode\": \"400065\",\n        \"country\": \"India\"\n      }\n    },\n    \"paymentId\": \"pay_2y2aDe6BEqbLCYJlgLcd\",\n    \"transactionId\": \"10261296-166853171260\",\n    \"sessionId\": \"fuel_BOuBK76KoPMICbp14Ute\",\n    \"status\": \"SERVICE_COMPLETE\",\n    \"paymentStatus\": \"PAYMENT_COMPLETE\",\n    \"serviceType\": \"FUEL\",\n    \"currency\": \"INR\",\n    \"amount\": 100,\n    \"paymentInstruments\": [\n      {\n        \"type\": \"upi\",\n        \"amount\": 50,\n        \"transactionId\": \"AXI59bc02049a9447c0bf53e8367175ac42\"\n      },\n      {\n        \"type\": \"rewards\",\n        \"name\": \"Sheeva Rewards\",\n        \"organization\": \"Sheeva\",\n        \"serviceProviderCode\": \"Sheeva\",\n        \"serviceProviderName\": \"Sheeva\",\n        \"amount\": 20,\n        \"transactionId\": \"rewards-sheeva-1213141\"\n      },\n      {\n        \"type\": \"rewards\",\n        \"name\": \"IOCL XtraRewards\",\n        \"organization\": \"IOCL\",\n        \"serviceProviderCode\": \"IOCL\",\n        \"serviceProviderName\": \"Indian Oil Corporation\",\n        \"amount\": 30,\n        \"transactionId\": \"rewards-iocl-xtra-12412412\"\n      }\n    ],\n    \"rewardsEarned\": [\n      {\n        \"type\": \"rewards\",\n        \"name\": \"Sheeva Rewards\",\n        \"organization\": \"Sheeva\",\n        \"serviceProviderCode\": \"Sheeva\",\n        \"serviceProviderName\": \"Sheeva\",\n        \"points\": 100,\n        \"amount\": 10,\n        \"transactionId\": \"rewards-sheeva-1213142\"\n      }\n    ],\n    \"createdAt\": 1668531651000\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f30b8e72-6b6f-4f48-97cd-9113eedb0d7e",
+          "name": "Get Payment Receipt",
+          "request": {
+            "name": "Get Payment Receipt",
+            "description": {
+              "content": "This request triggers sending the PDF receipt URL to a messaging channel, currently WhatsApp.\nIf successful, returns: HTTP 200 OK.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "partner-apis",
+                "transactions",
+                "receipt"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Provided by Sheeva",
+                "key": "x-sheeva-program-code",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "af357dbb-7fc9-472b-bc16-0f8e137bd59f",
+              "name": "Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "partner-apis",
+                    "transactions",
+                    "receipt"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Provided by Sheeva",
+                    "key": "x-sheeva-program-code",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"receiptStatus\": \"NOT_AVAILABLE\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://us-apis.sheeva.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d89bb99a-6f3b-491d-8a24-3e2697fbb51c",
+    "name": "SheevaConnect Authentication Transactions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This SheevaConnect™ API Specification 2.0 is © 2024 Parkofon Inc. (d/b/a Sheeva.AI) and is proprietary information that may not be duplicated, redistributed, form the basis of derivative works, or publicly performed/displayed without the expressed written permission of Sheeva.AI. If you wish to use the SheevaConnect™ API Specification 2.0 and use the SheevaConnect™ cloud platform, please contact Sheeva.AI for a license.\nSheevaConnect APIs enable connected vehicle payments & last-mile services for various use cases including Fueling, EV Charging, Parking and Retail. This solution allows automated & contactless payment in addition to proactive identification of user needs and last-mile navigation to the nearest Sheeva Pay enabled outlets.\nAll APIs follow HTTP status codes, return HTTP 200 OK when successful and following HTTP errors with a message. The message is self explaining to indicate the error in request. The example error codes include :\n\n\n\nError Code\nMessage\n\n\n\n\n400\nBad Request : Check the parameter values\n\n\n404\nResource not found\n\n\n500\nInternal Server Error\n\n\n\nSheevaConnect creates a session when system detects that vehicle requires a service (FUEL, CHARGING, PARKING). Each session goes through various statuses.\nSession Status Codes\n\n\n\nStatus\nDescription\n\n\n\n\nLOW_FUEL_DETECTED\nIf vehicle was low on fuel and system has sent the notification to driver for low fuel or if vehicle is not low on fuel but driver clicks on fuel icon to pay.\n\n\nLOW_CHARGE_DETECTED\nIf vehicle was low on charge and system has sent the notification to driver for low charged or if vehicle is not low on chrage but driver clicks on charge icon to pay.\n\n\nAT_SERVICE_HUB\nThe driver has reached the fuel station / EV charge station / etc.\n\n\nAT_SERVICE_POINT\nThe driver is at fuel pump / charging bay.\n\n\nSERVICE_POINT_CONFIRMED\nDriver confirms the fuel pump / charging bay.\n\n\nSERVICE_IN_PROGRESS\nWhen driver uses a parking service and vehicle is parked\n\n\nSERVICE_COMPLETE\nWhen user marks the fuel, charging, parking complete\n\n\nSERVICE_CANCELLED_BY_DRIVER\nWhen user cancel the service at the pump/ charging bay\n\n\nSERVICE_ABORTED_BY_SYSTEM\nWhen user does opt for service and move away from fuel pump/ charging bay\n\n\n\nPayment Status Codes\n\n\n\nStatus\nDescription\n\n\n\n\nPAYMENT_AUTHORIZED\nWhen a payment is authorized. Only applicable for Credit Card, Wallet and Rewards.\n\n\nPAYMENT_INITIATED\nWhen a payment is in progress. Only applicable for UPI in India.\n\n\nPAYMENT_COMPLETE\nPayment has been processed for a g\n\nContact Support:\n Name: Sheeva.AI",
+      "type": "text/plain"
+    }
+  }
+}

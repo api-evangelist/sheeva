@@ -1,0 +1,852 @@
+{
+  "item": [
+    {
+      "id": "59d42018-4d07-4ff0-a25f-259be8c42660",
+      "name": "Credit Cards",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f6d94664-31b8-47da-ae56-63d6ac9f2c93",
+          "name": "1 - Get Vehicle Wallet",
+          "request": {
+            "name": "1 - Get Vehicle Wallet",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "partner-apis",
+                "wallet"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Provided by Sheeva",
+                "key": "x-sheeva-program-code",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3aa10538-56ef-4545-948a-c5e40d3de094",
+              "name": "Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "partner-apis",
+                    "wallet"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Provided by Sheeva",
+                    "key": "x-sheeva-program-code",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"walletId\": \"1bf4de4f-442f-42d6-abc6-86a952ef7895\",\n  \"driverId\": \"dri_bP2lHCcPFzY6Yd19qvdM\",\n  \"vin\": \"sheeva_vehicle_id_test\",\n  \"type\": \"VEHICLE\",\n  \"cards\": [\n    {\n      \"id\": \"4e17a735-9810-4236-8544-790886d53f5f\",\n      \"lastFour\": \"0564\",\n      \"status\": \"ACTIVE\",\n      \"brand\": \"VISA\",\n      \"default\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8b9f54a1-4a19-419b-8267-664be157327c",
+          "name": "2 - Generate Public Key To Add Credit Card",
+          "request": {
+            "name": "2 - Generate Public Key To Add Credit Card",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "partner-apis",
+                "wallet",
+                "public-key"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Provided by Sheeva",
+                "key": "x-sheeva-program-code",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"walletId\": \"{{walletId}}\",\n  \"driverId\": \"{{driverId}}\",\n  \"vin\": \"{{vin}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "76ac6ed1-6876-4d90-8815-f7a7181b0735",
+              "name": "Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "partner-apis",
+                    "wallet",
+                    "public-key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Provided by Sheeva",
+                    "key": "x-sheeva-program-code",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"walletId\": \"{{walletId}}\",\n  \"driverId\": \"{{driverId}}\",\n  \"vin\": \"{{vin}}\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key\": \"MIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEAtVDy2c5oQxndUliND2sQCg0DOBnCdpdHS37UcR1SZYAmkPFNkz//N6+49OFgab+AtOC84aTICo3y6FnDXP0qF2fte1aIesDX2gDUDsfHoVMo7JRNzkRGIe4+t6hxa6Atjclpyb+sLo1tM0p5n1dStE2F44AgiDCbbdIsBfdDta2d4fhgUR8KfT7ZHrqH/ZOzp4BW53sde+FtmnstviVcSxShQNpI1KurfRKT+tgps6JNw/lJE58EnpqTHRIRraMTpWJThSsaiyWdlIhKjO0iq0bo5Gj/he4pHqM4W58mtT3dwhq3t21n28I2/H//2Xcyt2H/LLGeAzdcuAuoJlvKVCtNxO9aJ0lRu/TNvi75moMWXs3Eysbib3PtOCUVeJnj/fABEW4fkAX7c0ceM+dwkQpq8ccsDieywrpaZDgQ8g5toHyJb6Ye7rtsSnGnju6u+Dr1D1Xp7tM1Jilksj/p5s1bmEJMvQ4yxJgXnORhr6nB0rMib8UBT7mMwbyG2VdZAgMBAAE=\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "61015c7b-84a8-4744-9f9c-6bb61790fd22",
+          "name": "3 - Add Credit Card To A Wallet",
+          "request": {
+            "name": "3 - Add Credit Card To A Wallet",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "partner-apis",
+                "wallet",
+                "cards"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Provided by Sheeva",
+                "key": "x-sheeva-program-code",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"driverId\": \"{{driverId}}\",\n  \"vin\": \"{{vin}}\",\n  \"walletId\": \"{{walletId}}\",\n  \"encryptedCreditCard\": \"HrWagujXc4FctJdPBWiLGQjFjfGFwNfR8OpJRzzt9ROxfg6t5NeRPUJ/RwKiUFZdMR5+mKraKOS+u6wHofFeWJ6A0PO4LJZFOgL7Y+5EHIW1wrBrORsjl8hKnEcedx2Cd7aHopVacXgTaMpyEcjY8fZUbdbx3wGaNQfRdlgRwt0Ey58ko8S/HmPR1FYd7C7X0Or2yghg+5lIAz4dply9At9cGDy5LqAhbayUHpZUfTwGY9G+sDiS81KrKG87blSX37jchwSxDFCqz4gqy7avvQqEGLYNuJfXhFu6AvakUGNaQpbQ3wr07ZqYB9UBJFBRv0vrM/G5KMbyMcFPv5SJm6Fgt3MZ+T3VNzwh/+O+1+i+AZrhVTToTqlEEv06d/4vi52/A8DXt0KEeRWVgb8TN67a23zgHvYdW8/jZuPcp+gaPYUatUQMoyJHxn/cuzLFsF9f+Q3eYAL8IjGLC0RpglASHKyspmRUrCFXztx9kpiLb2hoSallC9UqD/U+LL0t\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8fecbce7-a4d9-4b0e-9def-d18f80c92200",
+              "name": "Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "partner-apis",
+                    "wallet",
+                    "cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Provided by Sheeva",
+                    "key": "x-sheeva-program-code",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"driverId\": \"{{driverId}}\",\n  \"vin\": \"{{vin}}\",\n  \"walletId\": \"{{walletId}}\",\n  \"encryptedCreditCard\": \"HrWagujXc4FctJdPBWiLGQjFjfGFwNfR8OpJRzzt9ROxfg6t5NeRPUJ/RwKiUFZdMR5+mKraKOS+u6wHofFeWJ6A0PO4LJZFOgL7Y+5EHIW1wrBrORsjl8hKnEcedx2Cd7aHopVacXgTaMpyEcjY8fZUbdbx3wGaNQfRdlgRwt0Ey58ko8S/HmPR1FYd7C7X0Or2yghg+5lIAz4dply9At9cGDy5LqAhbayUHpZUfTwGY9G+sDiS81KrKG87blSX37jchwSxDFCqz4gqy7avvQqEGLYNuJfXhFu6AvakUGNaQpbQ3wr07ZqYB9UBJFBRv0vrM/G5KMbyMcFPv5SJm6Fgt3MZ+T3VNzwh/+O+1+i+AZrhVTToTqlEEv06d/4vi52/A8DXt0KEeRWVgb8TN67a23zgHvYdW8/jZuPcp+gaPYUatUQMoyJHxn/cuzLFsF9f+Q3eYAL8IjGLC0RpglASHKyspmRUrCFXztx9kpiLb2hoSallC9UqD/U+LL0t\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"state\": \"Success\",\n  \"message\": \"Credit card added successfully\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cc1fa6f2-cda6-4146-a2c7-61e2bf845a2a",
+          "name": "4 - Get Credit Cards Associated To Wallet",
+          "request": {
+            "name": "4 - Get Credit Cards Associated To Wallet",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "partner-apis",
+                "wallet",
+                ":walletId",
+                "cards"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "walletId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Provided by Sheeva",
+                "key": "x-sheeva-program-code",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b4df10c1-fe4e-486c-aff5-5c8b3939fc6c",
+              "name": "Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "partner-apis",
+                    "wallet",
+                    ":walletId",
+                    "cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "walletId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Provided by Sheeva",
+                    "key": "x-sheeva-program-code",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"4e17a735-9810-4236-8544-790886d53f5f\",\n    \"lastFour\": \"0564\",\n    \"brand\": \"VISA\",\n    \"default\": true,\n    \"expired\": false\n  },\n  {\n    \"id\": \"90a23da-9810-4236-8544-790886d53f5f\",\n    \"lastFour\": \"0564\",\n    \"brand\": \"VISA\",\n    \"default\": false,\n    \"expired\": false\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "03104ce3-b98d-44c5-949c-4abf83ddecc3",
+          "name": "5 - Get Credit Card By Id",
+          "request": {
+            "name": "5 - Get Credit Card By Id",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "partner-apis",
+                "wallet",
+                ":walletId",
+                "cards",
+                ":cardId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "cardId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "walletId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Provided by Sheeva",
+                "key": "x-sheeva-program-code",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c193f6a7-0832-42ba-9215-43551b5d5531",
+              "name": "Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "partner-apis",
+                    "wallet",
+                    ":walletId",
+                    "cards",
+                    ":cardId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cardId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "walletId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Provided by Sheeva",
+                    "key": "x-sheeva-program-code",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"4e17a735-9810-4236-8544-790886d53f5f\",\n  \"lastFour\": \"0564\",\n  \"brand\": \"VISA\",\n  \"default\": true,\n  \"expired\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c06ffdde-6936-46e5-bf84-6e7ae73638b2",
+          "name": "6 - Mark Credit Card As Default",
+          "request": {
+            "name": "6 - Mark Credit Card As Default",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "partner-apis",
+                "wallet",
+                ":walletId",
+                "cards",
+                ":cardId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "cardId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "walletId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Provided by Sheeva",
+                "key": "x-sheeva-program-code",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a4f10827-ea90-4a00-b64b-f1626fdd4038",
+              "name": "Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "partner-apis",
+                    "wallet",
+                    ":walletId",
+                    "cards",
+                    ":cardId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cardId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "walletId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Provided by Sheeva",
+                    "key": "x-sheeva-program-code",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"state\": \"Success\",\n  \"message\": \"Card set as default\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "37c68336-873d-438c-95e6-b90a24c904b0",
+          "name": "7 - Delete Credit Card",
+          "request": {
+            "name": "7 - Delete Credit Card",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "partner-apis",
+                "wallet",
+                ":walletId",
+                "cards",
+                ":cardId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "cardId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "walletId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Provided by Sheeva",
+                "key": "x-sheeva-program-code",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "025b6da0-95b9-46fa-ad88-f161c569737d",
+              "name": "Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "partner-apis",
+                    "wallet",
+                    ":walletId",
+                    "cards",
+                    ":cardId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cardId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "walletId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Provided by Sheeva",
+                    "key": "x-sheeva-program-code",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"state\": \"Success\",\n  \"message\": \"Credit card has been deleted successfully\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://us-apis.sheeva.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "71cbb7c2-7ac9-4015-bed1-42f09611d3fb",
+    "name": "SheevaConnect Authentication Credit Cards API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This SheevaConnect™ API Specification 2.0 is © 2024 Parkofon Inc. (d/b/a Sheeva.AI) and is proprietary information that may not be duplicated, redistributed, form the basis of derivative works, or publicly performed/displayed without the expressed written permission of Sheeva.AI. If you wish to use the SheevaConnect™ API Specification 2.0 and use the SheevaConnect™ cloud platform, please contact Sheeva.AI for a license.\nSheevaConnect APIs enable connected vehicle payments & last-mile services for various use cases including Fueling, EV Charging, Parking and Retail. This solution allows automated & contactless payment in addition to proactive identification of user needs and last-mile navigation to the nearest Sheeva Pay enabled outlets.\nAll APIs follow HTTP status codes, return HTTP 200 OK when successful and following HTTP errors with a message. The message is self explaining to indicate the error in request. The example error codes include :\n\n\n\nError Code\nMessage\n\n\n\n\n400\nBad Request : Check the parameter values\n\n\n404\nResource not found\n\n\n500\nInternal Server Error\n\n\n\nSheevaConnect creates a session when system detects that vehicle requires a service (FUEL, CHARGING, PARKING). Each session goes through various statuses.\nSession Status Codes\n\n\n\nStatus\nDescription\n\n\n\n\nLOW_FUEL_DETECTED\nIf vehicle was low on fuel and system has sent the notification to driver for low fuel or if vehicle is not low on fuel but driver clicks on fuel icon to pay.\n\n\nLOW_CHARGE_DETECTED\nIf vehicle was low on charge and system has sent the notification to driver for low charged or if vehicle is not low on chrage but driver clicks on charge icon to pay.\n\n\nAT_SERVICE_HUB\nThe driver has reached the fuel station / EV charge station / etc.\n\n\nAT_SERVICE_POINT\nThe driver is at fuel pump / charging bay.\n\n\nSERVICE_POINT_CONFIRMED\nDriver confirms the fuel pump / charging bay.\n\n\nSERVICE_IN_PROGRESS\nWhen driver uses a parking service and vehicle is parked\n\n\nSERVICE_COMPLETE\nWhen user marks the fuel, charging, parking complete\n\n\nSERVICE_CANCELLED_BY_DRIVER\nWhen user cancel the service at the pump/ charging bay\n\n\nSERVICE_ABORTED_BY_SYSTEM\nWhen user does opt for service and move away from fuel pump/ charging bay\n\n\n\nPayment Status Codes\n\n\n\nStatus\nDescription\n\n\n\n\nPAYMENT_AUTHORIZED\nWhen a payment is authorized. Only applicable for Credit Card, Wallet and Rewards.\n\n\nPAYMENT_INITIATED\nWhen a payment is in progress. Only applicable for UPI in India.\n\n\nPAYMENT_COMPLETE\nPayment has been processed for a g\n\nContact Support:\n Name: Sheeva.AI",
+      "type": "text/plain"
+    }
+  }
+}

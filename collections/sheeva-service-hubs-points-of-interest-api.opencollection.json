@@ -1,0 +1,86 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SheevaConnect Authentication Service Hubs (Points Of Interest) API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Service Hubs (Points Of Interest)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Service Hubs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us-apis.sheeva.ai/v2/partner-apis/serviceHubs",
+            "headers": [
+              {
+                "name": "x-sheeva-program-code",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "This request returns POIs based on geolocation and service type.\nIf successful, returns: HTTP 201 CREATED.\n"
+        },
+        {
+          "info": {
+            "name": "Get Service Hubs (Deprecated)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us-apis.sheeva.ai/v2/partner-apis/serviceHubs",
+            "headers": [
+              {
+                "name": "x-sheeva-program-code",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This request returns POIs based on geolocation and service type.\nIf successful, returns: HTTP 201 CREATED.\n"
+        },
+        {
+          "info": {
+            "name": "Get Service Hub Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us-apis.sheeva.ai/v2/partner-apis/serviceHubs/:serviceHubId",
+            "headers": [
+              {
+                "name": "x-sheeva-program-code",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "serviceHubId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Service Hub Details"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

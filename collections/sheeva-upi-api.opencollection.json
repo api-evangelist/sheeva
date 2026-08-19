@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SheevaConnect Authentication UPI API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "UPI",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "UPI Payment Complete",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us-apis.sheeva.ai/v2/partner-apis/payments/upi/payment-complete",
+            "headers": [
+              {
+                "name": "x-sheeva-program-code",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "UPI Payment Complete"
+        },
+        {
+          "info": {
+            "name": "Pay For Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us-apis.sheeva.ai/v2/partner-apis/payments/upi/initiate",
+            "headers": [
+              {
+                "name": "x-sheeva-program-code",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sending demoMode=1 would run a transaction with fake payment and will not activate the pump, charger or the parking lot. This helps with simulated testing in the sandbox / development.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -167,3 +167,9 @@ tools:
 - name: getFeedback
   description: Get Feedback
   source_operation: openapi/sheeva-openapi.yml#getFeedback
+deployment:
+  mode: none
+  verified: derived
+  tools: 53
+  checked: '2026-08-12'
+  source: catalog MCP census

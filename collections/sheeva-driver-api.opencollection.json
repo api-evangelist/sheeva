@@ -1,0 +1,217 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SheevaConnect Authentication Driver API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Driver",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Register Driver",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us-apis.sheeva.ai/v2/partner-apis/drivers",
+            "headers": [
+              {
+                "name": "x-sheeva-program-code",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This request allows to add a driver profile.\nIf successful, returns: HTTP 201 CREATED.\n"
+        },
+        {
+          "info": {
+            "name": "Get List of Linked Vehicles to a Driver (Deprecated)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us-apis.sheeva.ai/v2/partner-apis/drivers/:driverId",
+            "headers": [
+              {
+                "name": "x-sheeva-program-code",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "driverId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get List of Linked Vehicles to a Driver (Deprecated)"
+        },
+        {
+          "info": {
+            "name": "Update Driver",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://us-apis.sheeva.ai/v2/partner-apis/drivers/:driverId",
+            "headers": [
+              {
+                "name": "x-sheeva-program-code",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "driverId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This request allows you to update details of a driver profile.\nIf successful, returns HTTP 200 OK.\n"
+        },
+        {
+          "info": {
+            "name": "Get Driver Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us-apis.sheeva.ai/v2/partner-apis/drivers/:driverId/details",
+            "headers": [
+              {
+                "name": "x-sheeva-program-code",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "driverId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This request returns driver details, associated vehicles and any active sessions. This is a convinience request that combines the resources: driver, vehicle, and a possible array of sessions.\nIf successful, returns: HTTP 200 OK.\n"
+        },
+        {
+          "info": {
+            "name": "Link Driver to a Vehicle",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us-apis.sheeva.ai/v2/partner-apis/drivers/:driverId/link",
+            "headers": [
+              {
+                "name": "x-sheeva-program-code",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "driverId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This API allows drivers to be paired with one of the vehicles. Once paired, this driver would be sent all notifications for this vehicle.\nIf successful, returns: HTTP 201 CREATED.\n"
+        },
+        {
+          "info": {
+            "name": "Unlink Driver from a Vehicle",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us-apis.sheeva.ai/v2/partner-apis/drivers/:driverId/link",
+            "headers": [
+              {
+                "name": "x-sheeva-program-code",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "driverId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This API allows drivers to unpair an already paired vehicle. Once unpaired, this driver would no longer be sent any notifications for this vehicle.\nIf successful, returns: HTTP 200 OK.\n"
+        },
+        {
+          "info": {
+            "name": "Mark Driver as current Driver for a Vehicle",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us-apis.sheeva.ai/v2/partner-apis/drivers/:driverId/drive",
+            "headers": [
+              {
+                "name": "x-sheeva-program-code",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "driverId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This request allows to mark the driver as current driver for the Vehicle\nIf successful, returns: HTTP 201 CREATED.\n"
+        },
+        {
+          "info": {
+            "name": "Remove Driver as Current driver for a vehicle",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us-apis.sheeva.ai/v2/partner-apis/drivers/:driverId/drive",
+            "headers": [
+              {
+                "name": "x-sheeva-program-code",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "driverId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This request allows to unmark the driver as current driver for the Vehicle\nif successful it will return HTTP Status Code 200\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

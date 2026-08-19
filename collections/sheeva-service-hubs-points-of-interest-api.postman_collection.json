@@ -1,0 +1,359 @@
+{
+  "item": [
+    {
+      "id": "a9ed0725-54f2-4dd3-b4bf-bd7960987809",
+      "name": "Service Hubs (Points Of Interest)",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b9aa618d-1a09-4f94-a960-1396ecfee4a4",
+          "name": "Get Service Hubs",
+          "request": {
+            "name": "Get Service Hubs",
+            "description": {
+              "content": "This request returns POIs based on geolocation and service type.\nIf successful, returns: HTTP 201 CREATED.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "partner-apis",
+                "serviceHubs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Provided by Sheeva",
+                "key": "x-sheeva-program-code",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c62a2283-8f3e-41f0-bb9b-a3d67f1c2259",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "partner-apis",
+                    "serviceHubs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Provided by Sheeva",
+                    "key": "x-sheeva-program-code",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"fst_380a228fd332746cadc3\",\n    \"type\": \"FUEL\",\n    \"displayName\": \"TEANECK TWSP\",\n    \"currency\": \"USD\",\n    \"location\": \"40.885482,-74.007431\",\n    \"logoUrl\": \"https://dev-in-sheeva-tandc.s3.ap-south-1.amazonaws.com/iocl_logo.png\",\n    \"addressDetails\": {\n      \"streetAddress\": \"Blythe Road, Chamberlayne\",\n      \"city\": \"Richmond\",\n      \"state\": \"Virginia\",\n      \"zipCode\": \"23116\",\n      \"country\": \"US\"\n    },\n    \"fuelPrices\": [\n      {\n        \"fuelType\": \"Gas Regular\",\n        \"price\": 3.5,\n        \"unit\": \"gallon\"\n      },\n      {\n        \"fuelType\": \"Gas Premium\",\n        \"price\": 4.5,\n        \"unit\": \"gallon\"\n      },\n      {\n        \"fuelType\": \"Diesel\",\n        \"price\": 3.5,\n        \"unit\": \"gallon\"\n      }\n    ],\n    \"promotions\": [\n      {\n        \"name\": \"Reward Days\",\n        \"category\": \"FUEL\",\n        \"discount\": \"Get 10 cents off per gallon\",\n        \"mediaURL\": \"https://example.com/abc.jpg\"\n      }\n    ],\n    \"amenities\": [\n      \"Washrooms\",\n      \"Free Air\",\n      \"Convenience Store\"\n    ],\n    \"operatingHours\": [\n      \"06:00-23:30\"\n    ],\n    \"openingHours\": [\n      {\n        \"day\": \"1\",\n        \"hours\": [\n          \"5:00 - 22:00\"\n        ]\n      },\n      {\n        \"day\": \"2\",\n        \"hours\": [\n          \"5:00 - 22:00\"\n        ]\n      },\n      {\n        \"day\": \"3\",\n        \"hours\": [\n          \"5:00 - 22:00\"\n        ]\n      },\n      {\n        \"day\": \"4\",\n        \"hours\": [\n          \"5:00 - 22:00\"\n        ]\n      },\n      {\n        \"day\": \"5\",\n        \"hours\": [\n          \"5:00 - 22:00\"\n        ]\n      },\n      {\n        \"day\": \"6\",\n        \"hours\": [\n          \"6:00 - 22:00\"\n        ]\n      },\n      {\n        \"day\": \"7\",\n        \"hours\": [\n          \"8:00 - 22:00\"\n        ]\n      }\n    ],\n    \"paymentEnabled\": true,\n    \"distance\": 8.710607771265286,\n    \"address\": \"Blythe Road, Chamberlayne\",\n    \"city\": \"Richmond\",\n    \"stateCode\": \"VA\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "60f71e98-ae47-4206-a0ed-0c5d07bd7ce8",
+          "name": "Get Service Hubs (Deprecated)",
+          "request": {
+            "name": "Get Service Hubs (Deprecated)",
+            "description": {
+              "content": "This request returns POIs based on geolocation and service type.\nIf successful, returns: HTTP 201 CREATED.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "partner-apis",
+                "serviceHubs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Provided by Sheeva",
+                "key": "x-sheeva-program-code",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"latitude\": 38.9262643,\n  \"longitude\": -77.2428208,\n  \"searchValue\": 5,\n  \"distance\": \"MILES\",\n  \"type\": \"FUEL\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "010688ed-2563-4e13-8344-77d4fee56f1c",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "partner-apis",
+                    "serviceHubs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Provided by Sheeva",
+                    "key": "x-sheeva-program-code",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"latitude\": 38.9262643,\n  \"longitude\": -77.2428208,\n  \"searchValue\": 5,\n  \"distance\": \"MILES\",\n  \"type\": \"FUEL\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"poiId\": \"cst_3f798db4b2fef377ab1b\",\n    \"type\": \"CHARGING\",\n    \"displayName\": \"PARKRDIGE IV\",\n    \"currency\": \"USD\",\n    \"location\": \"38.943907,-77.312812\",\n    \"address\": \"10700 Parkridge Blvd, Reston, va, us\",\n    \"active\": true,\n    \"chargers\": [\n      {\n        \"latitude\": 38.943905,\n        \"longitude\": -77.312798,\n        \"unified_connector_id\": \"db5d95aa-f69a-443a-b8cd-3aac6627360f\",\n        \"station_id\": \"84cc78fd-2c53-48a3-9c21-3aeeb08e0f97\",\n        \"connector_name\": \"PARKRDIGE IV, STATION 1\",\n        \"base_rate\": 0.19,\n        \"connector_type\": \"J-1772\",\n        \"network\": \"Charge_Point\",\n        \"speed\": 6.6,\n        \"availability\": \"available\",\n        \"street_address\": \"10700 Parkridge Blvd\",\n        \"city\": \"Reston\",\n        \"state\": \"Virginia\"\n      },\n      {\n        \"latitude\": 38.943905,\n        \"longitude\": -77.312798,\n        \"unified_connector_id\": \"90f29fbe-18fd-4c95-bb14-05a990af579f\",\n        \"station_id\": \"84cc78fd-2c53-48a3-9c21-3aeeb08e0f97\",\n        \"connector_name\": \"PARKRDIGE IV, STATION 1\",\n        \"base_rate\": 0.19,\n        \"connector_type\": \"J-1772\",\n        \"network\": \"Charge_Point\",\n        \"speed\": 6.6,\n        \"availability\": \"available\",\n        \"street_address\": \"10700 Parkridge Blvd\",\n        \"city\": \"Reston\",\n        \"state\": \"Virginia\"\n      }\n    ]\n  },\n  {\n    \"poiId\": \"cst_6f216de55c646e5231d9\",\n    \"type\": \"CHARGING\",\n    \"displayName\": \"WOLF TRAP\",\n    \"currency\": \"USD\",\n    \"location\": \"38.933441,-77.265007\",\n    \"address\": \"1645 Trap Rd, Vienna, va, us\",\n    \"active\": true,\n    \"chargers\": [\n      {\n        \"latitude\": 38.933426,\n        \"longitude\": -77.264969,\n        \"unified_connector_id\": \"8ad1da7f-fa0e-4152-aec2-f3c48c0c7f0b\",\n        \"station_id\": \"81d0f7e9-f1a0-45e5-b959-1d3dfd3366e9\",\n        \"connector_name\": \"WOLF TRAP, BARNS@WOLF TRAP\",\n        \"base_rate\": 0,\n        \"connector_type\": \"J-1772\",\n        \"network\": \"Charge_Point\",\n        \"speed\": 6.6,\n        \"availability\": \"available\",\n        \"street_address\": \"1645 Trap Rd\",\n        \"city\": \"Vienna\",\n        \"state\": \"Virginia\"\n      },\n      {\n        \"latitude\": 38.933426,\n        \"longitude\": -77.264969,\n        \"unified_connector_id\": \"fcaea0c9-3841-40bb-94f4-1ae96e724e93\",\n        \"station_id\": \"81d0f7e9-f1a0-45e5-b959-1d3dfd3366e9\",\n        \"connector_name\": \"WOLF TRAP, BARNS@WOLF TRAP\",\n        \"base_rate\": 0,\n        \"connector_type\": \"J-1772\",\n        \"network\": \"Charge_Point\",\n        \"speed\": 6.6,\n        \"availability\": \"in_use\",\n        \"street_address\": \"1645 Trap Rd\",\n        \"city\": \"Vienna\",\n        \"state\": \"Virginia\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6a55bc2f-5bec-4c7a-b862-3036676f06f2",
+          "name": "Get Service Hub Details",
+          "request": {
+            "name": "Get Service Hub Details",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "partner-apis",
+                "serviceHubs",
+                ":serviceHubId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "serviceHubId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Provided by Sheeva",
+                "key": "x-sheeva-program-code",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3cf90cfe-bf2d-4a4d-b7ab-6fe8a88481a9",
+              "name": "Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "partner-apis",
+                    "serviceHubs",
+                    ":serviceHubId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "serviceHubId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Provided by Sheeva",
+                    "key": "x-sheeva-program-code",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"displayName\": \"Marina Lot 9\",\n  \"currency\": \"USD\",\n  \"location\": \"33.982403360821465,-118.4560913004027\",\n  \"addressDetails\": {\n    \"city\": \"N/A\",\n    \"state\": \"N/A\",\n    \"zipCode\": \"N/A\",\n    \"country\": \"N/A\",\n    \"streetAddress\": \"N/A\"\n  },\n  \"amenities\": [\n    \"Convenience Store\",\n    \"Free Air\",\n    \"Washrooms\"\n  ],\n  \"promotions\": [\n    {\n      \"name\": \"Reward Days\",\n      \"category\": \"PARKING\",\n      \"discount\": \"N/A\",\n      \"mediaURL\": \"https://example.com/abc.jpg\"\n    }\n  ],\n  \"polygon\": \"33.982144 -118.455279;33.982945 -118.456666;33.982662 -118.456904;33.981964 -118.455694;33.982008 -118.455657;33.981974 -118.455600;33.981971 -118.455538;33.981993 -118.455475;33.982082 -118.455331;33.982144 -118.455279\",\n  \"timezone\": \"America/Los_Angeles\",\n  \"openingHours\": [\n    {\n      \"day\": \"1\",\n      \"hours\": [\n        \"5:00 - 22:00\"\n      ]\n    },\n    {\n      \"day\": \"2\",\n      \"hours\": [\n        \"5:00 - 22:00\"\n      ]\n    },\n    {\n      \"day\": \"3\",\n      \"hours\": [\n        \"5:00 - 22:00\"\n      ]\n    },\n    {\n      \"day\": \"4\",\n      \"hours\": [\n        \"5:00 - 22:00\"\n      ]\n    },\n    {\n      \"day\": \"5\",\n      \"hours\": [\n        \"5:00 - 22:00\"\n      ]\n    },\n    {\n      \"day\": \"6\",\n      \"hours\": [\n        \"6:00 - 22:00\"\n      ]\n    },\n    {\n      \"day\": \"7\",\n      \"hours\": [\n        \"8:00 - 22:00\"\n      ]\n    }\n  ],\n  \"id\": \"1100053\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://us-apis.sheeva.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "bff66f2e-4e42-45ca-b8bb-4fb957a5f755",
+    "name": "SheevaConnect Authentication Service Hubs (Points Of Interest) API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This SheevaConnect™ API Specification 2.0 is © 2024 Parkofon Inc. (d/b/a Sheeva.AI) and is proprietary information that may not be duplicated, redistributed, form the basis of derivative works, or publicly performed/displayed without the expressed written permission of Sheeva.AI. If you wish to use the SheevaConnect™ API Specification 2.0 and use the SheevaConnect™ cloud platform, please contact Sheeva.AI for a license.\nSheevaConnect APIs enable connected vehicle payments & last-mile services for various use cases including Fueling, EV Charging, Parking and Retail. This solution allows automated & contactless payment in addition to proactive identification of user needs and last-mile navigation to the nearest Sheeva Pay enabled outlets.\nAll APIs follow HTTP status codes, return HTTP 200 OK when successful and following HTTP errors with a message. The message is self explaining to indicate the error in request. The example error codes include :\n\n\n\nError Code\nMessage\n\n\n\n\n400\nBad Request : Check the parameter values\n\n\n404\nResource not found\n\n\n500\nInternal Server Error\n\n\n\nSheevaConnect creates a session when system detects that vehicle requires a service (FUEL, CHARGING, PARKING). Each session goes through various statuses.\nSession Status Codes\n\n\n\nStatus\nDescription\n\n\n\n\nLOW_FUEL_DETECTED\nIf vehicle was low on fuel and system has sent the notification to driver for low fuel or if vehicle is not low on fuel but driver clicks on fuel icon to pay.\n\n\nLOW_CHARGE_DETECTED\nIf vehicle was low on charge and system has sent the notification to driver for low charged or if vehicle is not low on chrage but driver clicks on charge icon to pay.\n\n\nAT_SERVICE_HUB\nThe driver has reached the fuel station / EV charge station / etc.\n\n\nAT_SERVICE_POINT\nThe driver is at fuel pump / charging bay.\n\n\nSERVICE_POINT_CONFIRMED\nDriver confirms the fuel pump / charging bay.\n\n\nSERVICE_IN_PROGRESS\nWhen driver uses a parking service and vehicle is parked\n\n\nSERVICE_COMPLETE\nWhen user marks the fuel, charging, parking complete\n\n\nSERVICE_CANCELLED_BY_DRIVER\nWhen user cancel the service at the pump/ charging bay\n\n\nSERVICE_ABORTED_BY_SYSTEM\nWhen user does opt for service and move away from fuel pump/ charging bay\n\n\n\nPayment Status Codes\n\n\n\nStatus\nDescription\n\n\n\n\nPAYMENT_AUTHORIZED\nWhen a payment is authorized. Only applicable for Credit Card, Wallet and Rewards.\n\n\nPAYMENT_INITIATED\nWhen a payment is in progress. Only applicable for UPI in India.\n\n\nPAYMENT_COMPLETE\nPayment has been processed for a g\n\nContact Support:\n Name: Sheeva.AI",
+      "type": "text/plain"
+    }
+  }
+}
