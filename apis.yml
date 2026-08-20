@@ -236,6 +236,8 @@ apis:
   humanURL: https://api-spec.sheeva.ai/
   baseURL: https://us-apis.sheeva.ai
   tags:
+  - Transaction
+  tags_raw:
   - Transactions
   properties:
   - type: OpenAPI
@@ -308,6 +310,8 @@ apis:
   humanURL: https://api-spec.sheeva.ai/
   baseURL: https://us-apis.sheeva.ai
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
