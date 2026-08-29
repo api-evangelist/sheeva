@@ -1,0 +1,26 @@
+slug: sheeva
+provider: Sheeva
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Automotive & Mobility
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: Loyalty
+  spec_file: sheeva-loyalty-api-openapi.yml
+  capability_id: BC-420.40
+  capability_id_l1: BC-420
+  capability_name: Loyalty & Retention Management
+  confidence: 0.8
+  evidence: GET /v2/partner-apis/loyalty-programs getMyPrograms; POST 'Sign up for a program'; 'Calculate
+    Rewards (Amount)' via /loyalty-programs/convert-my-points
+  reason: Operations enrol a driver into loyalty programmes and convert loyalty points to reward amounts
+    — loyalty programme administration, which maps to Loyalty & Retention Management. No automotive-specific
+    loyalty capability exists in the candidate list.
