@@ -232,6 +232,8 @@ apis:
   humanURL: https://api-spec.sheeva.ai/
   baseURL: https://us-apis.sheeva.ai
   tags:
+  - Sessions
+  tags_raw:
   - Session
   properties:
   - type: OpenAPI
@@ -288,6 +290,8 @@ apis:
   humanURL: https://api-spec.sheeva.ai/
   baseURL: https://us-apis.sheeva.ai
   tags:
+  - Vehicles
+  tags_raw:
   - Vehicle
   properties:
   - type: OpenAPI
