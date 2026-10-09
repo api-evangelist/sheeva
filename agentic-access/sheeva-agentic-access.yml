@@ -1,17 +1,22 @@
-generated: '2026-07-21'
+generated: '2026-09-23'
 method: generated
-source: openapi/sheeva-openapi.yml
+source: openapi/sheeva-authentication-api-openapi.yml, openapi/sheeva-credit-cards-api-openapi.yml,
+  openapi/sheeva-driver-alerts-api-openapi.yml, openapi/sheeva-driver-api-openapi.yml, openapi/sheeva-feedback-api-openapi.yml,
+  openapi/sheeva-loyalty-api-openapi.yml, openapi/sheeva-parking-api-openapi.yml, openapi/sheeva-payments-api-openapi.yml,
+  openapi/sheeva-service-hubs-points-of-interest-api-openapi.yml, openapi/sheeva-session-api-openapi.yml,
+  openapi/sheeva-transactions-api-openapi.yml, openapi/sheeva-upi-api-openapi.yml, openapi/sheeva-vehicle-api-openapi.yml,
+  openapi/sheeva-vehicle-events-api-openapi.yml, openapi/sheeva-webhooks-api-openapi.yml
 description: Recommended x-agentic-access execution contracts, classified heuristically from
   the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
   audience per deployment. See research/curity/agentic-governance/.
 summary:
   operations: 53
   by_action_class:
-    connected: 24
-    acting: 29
+    connected: 25
+    acting: 28
   by_consequence:
-    read: 24
-    write: 26
+    read: 25
+    write: 25
     physical: 3
   human_in_the_loop_required: 0
 operations:
@@ -25,9 +30,19 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /vehicle-events
+- path: /v2/partner-apis/wallet
+  method: get
+  operationId: getVehicleWallet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/partner-apis/wallet/public-key
   method: post
-  operationId: vehicleEvents
+  operationId: generatePublicKeyToAddCreditCard
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -41,6 +56,100 @@ operations:
       - abnormal
       - high-value
     audit: required
+- path: /v2/partner-apis/wallet/cards
+  method: post
+  operationId: addCreditCardToAWallet
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/partner-apis/wallet/{walletId}/cards
+  method: get
+  operationId: getCreditCardsAssociatedToWallet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/partner-apis/wallet/{walletId}/cards/{cardId}
+  method: get
+  operationId: getCreditCardById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/partner-apis/wallet/{walletId}/cards/{cardId}
+  method: patch
+  operationId: markCreditCardAsDefault
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/partner-apis/wallet/{walletId}/cards/{cardId}
+  method: delete
+  operationId: deleteCreditCard
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/partner-apis/alerts
+  method: post
+  operationId: updateAlertPreference
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/partner-apis/alerts/
+  method: get
+  operationId: getAlertPreference
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
 - path: /v2/partner-apis/drivers
   method: post
   operationId: registerDriver
@@ -157,9 +266,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /v2/partner-apis/vehicles
+- path: /v2/partner-apis/feedback/reasons
   method: get
-  operationId: searchVehicles
+  operationId: getCancellationReasons
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -167,9 +276,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /v2/partner-apis/vehicles
+- path: /v2/partner-apis/feedback
   method: post
-  operationId: registerVehicle
+  operationId: submitFeedback
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -183,9 +292,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /v2/partner-apis/vehicles/{vin}
+- path: /v2/partner-apis/feedback/
   method: get
-  operationId: getAVehicle
+  operationId: getFeedback
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -193,25 +302,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /v2/partner-apis/vehicles/{vin}
-  method: patch
-  operationId: updateVehicle
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v2/partner-apis/vehicles/{vin}/drivers
+- path: /v2/partner-apis/loyalty-programs
   method: get
-  operationId: getDriversByVin
+  operationId: getMyPrograms
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -219,9 +312,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /v2/partner-apis/alerts
+- path: /v2/partner-apis/loyalty-programs
   method: post
-  operationId: updateAlertPreference
+  operationId: signUpForAProgram
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -235,9 +328,109 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /v2/partner-apis/alerts/
+- path: /v2/partner-apis/loyalty-programs/convert-my-points
+  method: post
+  operationId: calculateRewards
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/partner-apis/parking/quote
   method: get
-  operationId: getAlertPreference
+  operationId: getQuote
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/partner-apis/parking/reserve
+  method: post
+  operationId: reserveParking
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/partner-apis/payments/supported-payment-methods
+  method: get
+  operationId: getSupportedPaymentMethods
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/partner-apis/payments/authorize-transaction
+  method: post
+  operationId: authorizePayment
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/partner-apis/payments/upi/payment-status
+  method: get
+  operationId: paymentStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/partner-apis/serviceHubs
+  method: get
+  operationId: getServiceHubs
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/partner-apis/serviceHubs
+  method: post
+  operationId: getServiceHubs2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/partner-apis/serviceHubs/{serviceHubId}
+  method: get
+  operationId: getServiceHubDetails
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -345,9 +538,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /v2/partner-apis/serviceHubs
+- path: /v2/partner-apis/transactions
   method: get
-  operationId: getServiceHubs
+  operationId: getPaymentTransactions
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -355,25 +548,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /v2/partner-apis/serviceHubs
-  method: post
-  operationId: getServiceHubs2
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v2/partner-apis/serviceHubs/{serviceHubId}
+- path: /v2/partner-apis/transactions/details
   method: get
-  operationId: getServiceHubDetails
+  operationId: getPaymentTransactionsDetails
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -381,9 +558,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /v2/partner-apis/parking/quote
+- path: /v2/partner-apis/transactions/receipt
   method: get
-  operationId: getQuote
+  operationId: getPaymentReceipt
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -391,22 +568,6 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /v2/partner-apis/parking/reserve
-  method: post
-  operationId: reserveParking
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
 - path: /v2/partner-apis/payments/upi/payment-complete
   method: post
   operationId: upiPaymentComplete
@@ -443,9 +604,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /v2/partner-apis/transactions
+- path: /v2/partner-apis/vehicles
   method: get
-  operationId: getPaymentTransactions
+  operationId: searchVehicles
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -453,39 +614,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /v2/partner-apis/transactions/details
-  method: get
-  operationId: getPaymentTransactionsDetails
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v2/partner-apis/transactions/receipt
-  method: get
-  operationId: getPaymentReceipt
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v2/partner-apis/wallet
-  method: get
-  operationId: getVehicleWallet
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v2/partner-apis/wallet/public-key
+- path: /v2/partner-apis/vehicles
   method: post
-  operationId: generatePublicKeyToAddCreditCard
+  operationId: registerVehicle
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -499,25 +630,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /v2/partner-apis/wallet/cards
-  method: post
-  operationId: addCreditCardToAWallet
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v2/partner-apis/wallet/{walletId}/cards
+- path: /v2/partner-apis/vehicles/{vin}
   method: get
-  operationId: getCreditCardsAssociatedToWallet
+  operationId: getAVehicle
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -525,19 +640,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /v2/partner-apis/wallet/{walletId}/cards/{cardId}
-  method: get
-  operationId: getCreditCardById
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v2/partner-apis/wallet/{walletId}/cards/{cardId}
+- path: /v2/partner-apis/vehicles/{vin}
   method: patch
-  operationId: markCreditCardAsDefault
+  operationId: updateVehicle
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -551,25 +656,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /v2/partner-apis/wallet/{walletId}/cards/{cardId}
-  method: delete
-  operationId: deleteCreditCard
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v2/partner-apis/payments/supported-payment-methods
+- path: /v2/partner-apis/vehicles/{vin}/drivers
   method: get
-  operationId: getSupportedPaymentMethods
+  operationId: getDriversByVin
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -577,34 +666,22 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /v2/partner-apis/payments/authorize-transaction
+- path: /vehicle-events
   method: post
-  operationId: authorizePayment
+  operationId: vehicleEvents
   x-agentic-access:
     action-class: acting
-    consequence: physical
+    consequence: write
     subject: required
     audience: null
     token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
+      max-ttl: 900
     escalation:
       human-in-the-loop: conditional
       triggers:
       - abnormal
       - high-value
     audit: required
-- path: /v2/partner-apis/payments/upi/payment-status
-  method: get
-  operationId: paymentStatus
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
 - path: /v2/partner-apis/webhooks/status-updates
   method: post
   operationId: registerStatusWebhook
@@ -647,81 +724,3 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /v2/partner-apis/loyalty-programs
-  method: get
-  operationId: getMyPrograms
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v2/partner-apis/loyalty-programs
-  method: post
-  operationId: signUpForAProgram
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v2/partner-apis/loyalty-programs/convert-my-points
-  method: post
-  operationId: calculateRewards
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v2/partner-apis/feedback/reasons
-  method: get
-  operationId: getCancellationReasons
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v2/partner-apis/feedback
-  method: post
-  operationId: submitFeedback
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v2/partner-apis/feedback/
-  method: get
-  operationId: getFeedback
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
